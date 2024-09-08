@@ -1,12 +1,12 @@
 import { openai } from "@ai-sdk/openai";
 import { generateObject } from "ai";
 import { NextResponse } from "next/server";
-import { z } from "zod";
+import { CardSchema } from "@/app/cardSchema";
 
-const modelName = "gpt-4o-2024-08-24";
-const CardSchema = z.array(z.string().min(2).describe("a word or phrase")).length(9);
+const modelName = "gpt-4o-2024-08-06";
 
-export async function GET(req: Request) {
+export async function POST(req: Request) {
+  console.log("querying model...")
   const { object } = await generateObject({
     model: openai(modelName),
     prompt: "Generate nine different words or short phrases",
