@@ -9,10 +9,11 @@ export default function Home() {
     api: "/card/api",
     schema: CardSchema,
     initialValue: {
-      concepts: [],
+      names: [],
     },
   });
 
+  console.log(object);
   return (
     <div className="min-h-screen grid place-content-center">
       <Card data={object as CardSchemaType} />

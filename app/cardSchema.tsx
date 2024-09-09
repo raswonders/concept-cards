@@ -1,12 +1,12 @@
 import { z } from "zod";
 
-const listOfConcepts = z
-  .array(z.string())
-  .length(9)
-  .describe("9 strings representing unique concept");
+const Name = z.object({
+  name: z.string(),
+  category: z.string(),
+});
 
 export const CardSchema = z.object({
-  concepts: listOfConcepts,
+  names: z.array(Name).length(9),
 });
 
 export type CardSchemaType = z.infer<typeof CardSchema>;

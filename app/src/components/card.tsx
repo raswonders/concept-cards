@@ -9,7 +9,7 @@ export function Card({ data }: Props) {
   return (
     <div className="borderi border-black">
       <ol className="">
-        {data.concepts.map((concept) => (
+        {data.names.map((concept) => (
           <li>{concept}</li>
         ))}
       </ol>
