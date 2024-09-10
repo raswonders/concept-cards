@@ -49,7 +49,10 @@ export default function Home() {
   return (
     <div className="min-h-screen grid place-content-center">
       <Card data={object as CardSchemaType} />
-      <button className="" onClick={() => submit("")}>
+      <button
+        className=""
+        onClick={() => submit(serializeHistory(conceptsHistory))}
+      >
         New Card
       </button>
     </div>

@@ -2,6 +2,7 @@ import { openai } from "@ai-sdk/openai";
 import { generateObject } from "ai";
 import { NextResponse } from "next/server";
 import { CardSchema } from "@/app/cardSchema";
+import { parseHistory } from "@/app/helpers/history";
 
 const modelName = "gpt-4o-2024-08-06";
 
@@ -18,18 +19,24 @@ const categories = [
 ]
 
 export async function POST(req: Request) {
+  const body = await req.json();
+  let conceptsHistory = parseHistory(body);
+
   let prompt = "";
   for (let i = 0; i < 9; i++) {
-    prompt += `For item no ${i} generate a name from category ${categories[i]}.`
+    let usedPreviously = conceptsHistory.get(categories[i]);
+    let exclude = usedPreviously ? `but exclude following names ${[...usedPreviously].join(",")}` : "";
+    prompt += `For item no ${i} generate a name from category ${categories[i]} ${exclude}.`
   }
 
   console.log("querying model...")
+  console.log({ prompt })
   const { object } = await generateObject({
     model: openai(modelName),
     prompt,
     schema: CardSchema,
     temperature: 0.6,
   })
-  
+
   return NextResponse.json(object);
 }
