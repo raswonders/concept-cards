@@ -8,8 +8,8 @@ const modelName = "gpt-4o-2024-08-06";
 const categories = [
   "Actors and directors",
   "Movies",
-  "Writters",
-  "Superheores and Villains",
+  "Writers",
+  "Superheroes and Villains",
   "Musicians",
   "Songs",
   "Video games from 90s",
@@ -30,6 +30,6 @@ export async function POST(req: Request) {
     schema: CardSchema,
     temperature: 0.6,
   })
-
+  
   return NextResponse.json(object);
 }
