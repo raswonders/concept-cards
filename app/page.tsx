@@ -21,9 +21,13 @@ export default function Home() {
 
   useEffect(() => {
     const savedHistory = localStorage.getItem("conceptsHistory");
-    setConceptsHistory(savedHistory ? parseHistory(savedHistory) : new Map());
-
-    submit(serializeHistory(conceptsHistory));
+    if (savedHistory) {
+      setConceptsHistory(parseHistory(savedHistory));
+      submit(savedHistory);
+    } else {
+      setConceptsHistory(new Map());
+      submit("");
+    }
   }, []);
 
   useEffect(() => {
