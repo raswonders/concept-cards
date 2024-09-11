@@ -20,12 +20,12 @@ const categories = [
 
 export async function POST(req: Request) {
   const body = await req.json();
-  let conceptsHistory = parseHistory(body);
+  const conceptsHistory = parseHistory(body);
 
   let prompt = "";
   for (let i = 0; i < 9; i++) {
-    let usedPreviously = conceptsHistory.get(categories[i]);
-    let exclude = usedPreviously ? `but exclude following names ${[...usedPreviously].join(",")}` : "";
+    const usedPreviously = conceptsHistory.get(categories[i]);
+    const exclude = usedPreviously ? `but exclude following names ${[...usedPreviously].join(",")}` : "";
     prompt += `For item no ${i} generate a name from category ${categories[i]} ${exclude}.`
   }
 

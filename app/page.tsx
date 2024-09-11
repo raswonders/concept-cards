@@ -20,7 +20,7 @@ export default function Home() {
   });
 
   useEffect(() => {
-    let savedHistory = localStorage.getItem("conceptsHistory");
+    const savedHistory = localStorage.getItem("conceptsHistory");
     setConceptsHistory(savedHistory ? parseHistory(savedHistory) : new Map());
   }, []);
 
@@ -28,7 +28,7 @@ export default function Home() {
     if ((object as CardSchemaType).names.length > 0) {
       setConceptsHistory((prev) => {
         const next = new Map(prev);
-        for (let concept of (object as CardSchemaType).names) {
+        for (const concept of (object as CardSchemaType).names) {
           if (!next.has(concept.category)) {
             next.set(concept.category, new Set([concept.name]));
           } else {
@@ -41,7 +41,7 @@ export default function Home() {
             );
           }
         }
-        let json = serializeHistory(next);
+        const json = serializeHistory(next);
         if (json) localStorage.setItem("conceptsHistory", json);
         return next;
       });

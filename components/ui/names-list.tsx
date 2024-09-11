@@ -8,12 +8,15 @@ interface Props {
 
 function ListSkeleton() {
   const ITEMS_COUNT = 9;
-  let array = new Array(ITEMS_COUNT).fill(undefined);
+  const array = new Array(ITEMS_COUNT).fill(undefined);
 
   return (
     <div className="text-center leading-6">
-      {array.map((item) => (
-        <Skeleton className="inline-block w-2/3 h-4 rounded-full bg-primary/10" />
+      {array.map((_, index) => (
+        <Skeleton
+          key={index}
+          className="inline-block w-2/3 h-4 rounded-full bg-primary/10"
+        />
       ))}
     </div>
   );
@@ -26,7 +29,7 @@ export function NamesList({ data, isLoading }: Props) {
     data.names.length > 0 && (
       <ol className="text-center">
         {data.names.map((concept) => (
-          <li>{concept.name}</li>
+          <li key={concept.name}>{concept.name}</li>
         ))}
       </ol>
     )
