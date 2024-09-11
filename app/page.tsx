@@ -1,11 +1,17 @@
 "use client";
 
-import { Card } from "@/app/components/card";
+import { ListOfNames } from "@/app/components/card";
 import { experimental_useObject as useObject } from "ai/react";
 import { CardSchema, CardSchemaType } from "./cardSchema";
 import { useEffect, useState } from "react";
 import { History, parseHistory, serializeHistory } from "./helpers/history";
 import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+} from "@/components/ui/card";
 
 export default function Home() {
   const [conceptsHistory, setConceptsHistory] = useState<History>(new Map());
@@ -48,15 +54,20 @@ export default function Home() {
   }, [object]);
 
   return (
-    <div className="min-h-screen grid place-content-center">
-      {!error && <Card data={object as CardSchemaType} />}
-
-      <Button
-        disabled={isLoading}
-        onClick={() => submit(serializeHistory(conceptsHistory))}
-      >
-        Next Card
-      </Button>
+    <div className="min-h-screen flex justify-center">
+      <main className="min-w-0 w-full max-w-[46ch] py-10 p-6 flex flex-col gap-6 items-center">
+        <Card className="w-full pt-6">
+          <CardContent>
+            {!error && <ListOfNames data={object as CardSchemaType} />}
+          </CardContent>
+        </Card>
+        <Button
+          disabled={isLoading}
+          onClick={() => submit(serializeHistory(conceptsHistory))}
+        >
+          Next Card
+        </Button>
+      </main>
     </div>
   );
 }

@@ -4,10 +4,10 @@ interface Props {
   data: CardSchemaType;
 }
 
-export function Card({ data }: Props) {
+export function ListOfNames({ data }: Props) {
   return (
     data.names.length > 0 && (
-      <ol className="border-2 border-slate-400 p-4 rounded-lg">
+      <ol className="text-center">
         {data.names.map((concept) => (
           <li>{concept.name}</li>
         ))}
