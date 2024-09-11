@@ -19,11 +19,6 @@ const categories = [
 ]
 
 export async function POST(req: Request) {
-
-  if (!process.env.OPENAI_API_KEY) {
-    console.error("key is missing!!!!")
-    console.log(process.env)
-  }
   const body = await req.json();
   const conceptsHistory = parseHistory(body);
 
