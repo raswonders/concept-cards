@@ -35,7 +35,7 @@ export async function POST(req: Request) {
     model: openai(modelName),
     prompt,
     schema: CardSchema,
-    temperature: 0.6,
+    temperature: 1,
   })
 
   return NextResponse.json(object);

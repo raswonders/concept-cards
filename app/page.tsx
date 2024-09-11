@@ -5,11 +5,12 @@ import { experimental_useObject as useObject } from "ai/react";
 import { CardSchema, CardSchemaType } from "./cardSchema";
 import { useEffect, useState } from "react";
 import { History, parseHistory, serializeHistory } from "./helpers/history";
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
   const [conceptsHistory, setConceptsHistory] = useState<History>(new Map());
 
-  const { object, submit, isLoading } = useObject({
+  const { object, submit, isLoading, error } = useObject({
     api: "/card/api",
     schema: CardSchema,
     initialValue: {
@@ -48,13 +49,14 @@ export default function Home() {
 
   return (
     <div className="min-h-screen grid place-content-center">
-      <Card data={object as CardSchemaType} />
-      <button
-        className=""
+      {!error && <Card data={object as CardSchemaType} />}
+
+      <Button
+        disabled={isLoading}
         onClick={() => submit(serializeHistory(conceptsHistory))}
       >
-        New Card
-      </button>
+        Next Card
+      </Button>
     </div>
   );
 }
