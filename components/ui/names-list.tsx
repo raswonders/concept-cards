@@ -19,7 +19,7 @@ function ListSkeleton() {
   );
 }
 
-export function ListOfNames({ data, isLoading }: Props) {
+export function NamesList({ data, isLoading }: Props) {
   return isLoading ? (
     <ListSkeleton />
   ) : (

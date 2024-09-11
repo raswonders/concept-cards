@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { History, parseHistory, serializeHistory } from "./helpers/history";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { ListOfNames } from "@/components/ui/ListOfNames";
+import { NamesList } from "@/components/ui/names-list";
 
 export default function Home() {
   const [conceptsHistory, setConceptsHistory] = useState<History>(new Map());
@@ -54,7 +54,7 @@ export default function Home() {
         <Card className="w-full pt-6">
           <CardContent>
             {!error && (
-              <ListOfNames
+              <NamesList
                 isLoading={isLoading}
                 data={object as CardSchemaType}
               />
