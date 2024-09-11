@@ -1,17 +1,12 @@
 "use client";
 
-import { ListOfNames } from "@/app/components/card";
 import { experimental_useObject as useObject } from "ai/react";
 import { CardSchema, CardSchemaType } from "./cardSchema";
 import { useEffect, useState } from "react";
 import { History, parseHistory, serializeHistory } from "./helpers/history";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-} from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
+import { ListOfNames } from "@/components/ui/ListOfNames";
 
 export default function Home() {
   const [conceptsHistory, setConceptsHistory] = useState<History>(new Map());
@@ -58,7 +53,12 @@ export default function Home() {
       <main className="min-w-0 w-full max-w-[46ch] py-10 p-6 flex flex-col gap-6 items-center">
         <Card className="w-full pt-6">
           <CardContent>
-            {!error && <ListOfNames data={object as CardSchemaType} />}
+            {!error && (
+              <ListOfNames
+                isLoading={isLoading}
+                data={object as CardSchemaType}
+              />
+            )}
           </CardContent>
         </Card>
         <Button
