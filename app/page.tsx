@@ -22,6 +22,8 @@ export default function Home() {
   useEffect(() => {
     const savedHistory = localStorage.getItem("conceptsHistory");
     setConceptsHistory(savedHistory ? parseHistory(savedHistory) : new Map());
+
+    submit(serializeHistory(conceptsHistory));
   }, []);
 
   useEffect(() => {
