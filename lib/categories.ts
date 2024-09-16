@@ -1,4 +1,4 @@
-type Category = {
+export interface Category {
   name: string;
   easy: () => string | null;
   medium: () => string | null;
@@ -12,6 +12,19 @@ export const wildcardCategory = {
   },
   medium: function () {
     return `generate a common word for advanced concept from category ${this.name}`;
+  },
+  hard: function () {
+    return `generate a less common word from category ${this.name}`;
+  },
+};
+
+export const testCategory = {
+  name: "Places",
+  easy: function () {
+    return `generate a famous word from category ${this.name}`;
+  },
+  medium: function () {
+    return `generate a common word from category ${this.name}`;
   },
   hard: function () {
     return `generate a less common word from category ${this.name}`;
