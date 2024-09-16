@@ -11,8 +11,8 @@ export function createPrompt(history: History) {
   } 
   const difficulties = ["easy", "medium", "hard"];
 
-  for (let difficulty of difficulties) {
-    let pool = shuffleArray(categories);
+  for (const difficulty of difficulties) {
+    const pool = shuffleArray(categories);
     for (let i = 0; i < 3; i++) {
       while(true) {
         const category = pool.pop() || wildcardCategory;
