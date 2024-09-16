@@ -1,6 +1,6 @@
 import { categories, wildcardCategory } from "./categories";
 import { shuffleArray } from "./utils";
-import { History } from "@/app/helpers/history";
+import { History } from "@/lib/history";
 
 export function createPrompt(history: History) {
   let prompt = "";

@@ -3,7 +3,7 @@
 import { experimental_useObject as useObject } from "ai/react";
 import { CardSchema, CardSchemaType } from "./cardSchema";
 import { useEffect, useState } from "react";
-import { History, parseHistory, serializeHistory } from "./helpers/history";
+import { History, parseHistory, serializeHistory } from "../lib/history";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { NamesList } from "@/components/ui/names-list";

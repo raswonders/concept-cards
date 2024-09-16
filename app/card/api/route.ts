@@ -2,7 +2,7 @@ import { openai } from "@ai-sdk/openai";
 import { generateObject } from "ai";
 import { NextResponse } from "next/server";
 import { CardSchema } from "@/app/cardSchema";
-import { parseHistory } from "@/app/helpers/history";
+import { parseHistory } from "@/lib/history";
 import { createPrompt } from "@/lib/prompt";
 
 const modelName = "gpt-4o-2024-08-06";
