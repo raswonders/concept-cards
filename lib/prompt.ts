@@ -17,7 +17,7 @@ export function createPrompt(history: History) {
     for (let i = 0; i < 3; i++) {
       while (true) {
         const category = pool.pop() || wildcardCategory;
-        const slotPrompt = category[difficulty as "easy" | "medium" | "hard"]();
+        const slotPrompt = category[difficulty as "easy" | "medium" | "hard"];
         if (slotPrompt) {
           const usedPreviously = history.get(category.name)
             ? [...(history.get(category.name) as Set<string>)].join(",")
@@ -27,7 +27,8 @@ export function createPrompt(history: History) {
             : "";
           prompt += `For item ${
             difficultyMatrix[difficulty as keyof typeof difficultyMatrix] + i
-          } ${slotPrompt}${exclude}.`;
+          } generate ${slotPrompt} from category ${category.name}${exclude}.`;
+          break;
         }
 
         if (pool.length === 0) break;
@@ -46,7 +47,7 @@ export function createSingleCatPrompt(
 
   for (const difficulty of difficulties) {
     for (let i = 0; i < 3; i++) {
-      let slotPrompt = category[difficulty as "easy" | "medium" | "hard"]();
+      let slotPrompt = category[difficulty as "easy" | "medium" | "hard"];
       if (slotPrompt) {
         const usedPreviously = history.get(category.name)
           ? [...(history.get(category.name) as Set<string>)].join(",")
@@ -54,12 +55,12 @@ export function createSingleCatPrompt(
         const exclude = usedPreviously ? `, but exclude ${usedPreviously}` : "";
         prompt += `For item ${
           difficultyMatrix[difficulty as keyof typeof difficultyMatrix] + i
-        } ${slotPrompt}${exclude}.`;
+        } generate ${slotPrompt} from category ${category.name}${exclude}.`;
       } else {
-        slotPrompt = "generate empty string";
+        slotPrompt = "an empty string";
         prompt += `For item ${
           difficultyMatrix[difficulty as keyof typeof difficultyMatrix] + i
-        } ${slotPrompt}.`;
+        } generate ${slotPrompt}`;
       }
     }
   }

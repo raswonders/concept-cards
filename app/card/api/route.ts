@@ -2,9 +2,8 @@ import { openai } from "@ai-sdk/openai";
 import { generateObject } from "ai";
 import { NextResponse } from "next/server";
 import { parseHistory } from "@/lib/history";
-import { createPrompt, createSingleCatPrompt } from "@/lib/prompt";
+import { createPrompt } from "@/lib/prompt";
 import { CardSchema } from "@/lib/cardSchema";
-import { testCategory } from "@/lib/categories";
 
 const modelName = "gpt-4o-2024-08-06";
 
@@ -12,7 +11,6 @@ export async function POST(req: Request) {
   const body = await req.json();
   const conceptsHistory = parseHistory(body);
   const prompt = createPrompt(conceptsHistory);
-  // const prompt = createSingleCatPrompt(testCategory);
 
   console.log("querying model...");
   console.log({ prompt });

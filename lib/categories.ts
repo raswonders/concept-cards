@@ -1,143 +1,664 @@
 export interface Category {
   name: string;
-  easy: () => string | null;
-  medium: () => string | null;
-  hard: () => string | null;
-};
+  easy: string;
+  medium: string;
+  hard: string;
+}
 
 export const wildcardCategory = {
   name: "Miscellaneous",
-  easy: function () {
-    return `generate a common word from category ${this.name}`;
-  },
-  medium: function () {
-    return `generate a common word for advanced concept from category ${this.name}`;
-  },
-  hard: function () {
-    return `generate a less common word from category ${this.name}`;
-  },
+  easy: `a common word`,
+  medium: `a common word for advanced concept`,
+  hard: `a less common word`,
 };
 
-export const testCategory = {
-  name: "Places",
-  easy: function () {
-    return `generate a famous word from category ${this.name}`;
-  },
-  medium: function () {
-    return `generate a common word from category ${this.name}`;
-  },
-  hard: function () {
-    return `generate a less common word from category ${this.name}`;
-  },
-};
-
-export const categories = [
+export const categories: Category[] = [
   {
-    name: "Actors and directors",
-    easy: function () {
-      return `generate a famous name from category ${this.name}`;
-    },
-    medium: function () {
-      return null;
-    },
-    hard: function () {
-      return `generate a less known name from category ${this.name}`;
-    },
+    name: "Idioms and Expressions",
+    easy: "a common idiom or expression",
+    medium: "a less common idiom or expression",
+    hard: "a rare or complex idiom or expression",
+  },
+  {
+    name: "Famous Movie Quotes",
+    easy: "a famous movie quote from a blockbuster",
+    medium: "a well-known movie quote from a classic film",
+    hard: "an obscure movie quote from a cult film",
+  },
+  {
+    name: "Metaphors",
+    easy: "a simple metaphor",
+    medium: "a more complex metaphor",
+    hard: "an abstract or literary metaphor",
+  },
+  {
+    name: "Civilizations and Empires",
+    easy: "a well-known ancient civilization",
+    medium: "a less famous historical empire",
+    hard: "an obscure or short-lived civilization",
+  },
+  {
+    name: "Inventions and Discoveries",
+    easy: "a common household invention",
+    medium: "a significant scientific discovery",
+    hard: "a niche or specialized invention",
+  },
+  {
+    name: "Architecture",
+    easy: "a famous architectural landmark",
+    medium: "a notable architectural style",
+    hard: "a complex architectural term or technique",
+  },
+  {
+    name: "Space Exploration",
+    easy: "a well-known space mission or astronaut",
+    medium: "a space-related scientific concept",
+    hard: "an advanced space technology or recent discovery",
+  },
+  {
+    name: "Explorers",
+    easy: "a famous explorer from history",
+    medium: "a lesser-known explorer or expedition",
+    hard: "a modern explorer or extreme adventurer",
+  },
+  {
+    name: "Actors and Directors",
+    easy: "a Hollywood A-list actor or famous director",
+    medium: "a respected character actor or indie director",
+    hard: "a niche or avant-garde filmmaker",
   },
   {
     name: "Movies",
-    easy: function () {
-      return null;
-    },
-    medium: function () {
-      return null;
-    },
-    hard: function () {
-      return null;
-    },
-  },
-  {
-    name: "Writers",
-    easy: function () {
-      return null;
-    },
-    medium: function () {
-      return null;
-    },
-    hard: function () {
-      return null;
-    },
-  },
-  {
-    name: "Superheroes and Villains",
-    easy: function () {
-      return null;
-    },
-    medium: function () {
-      return null;
-    },
-    hard: function () {
-      return null;
-    },
-  },
-  {
-    name: "Musicians",
-    easy: function () {
-      return null;
-    },
-    medium: function () {
-      return null;
-    },
-    hard: function () {
-      return null;
-    },
+    easy: "a popular blockbuster movie",
+    medium: "a critically acclaimed film",
+    hard: "an art house or foreign language film",
   },
   {
     name: "Songs",
-    easy: function () {
-      return null;
-    },
-    medium: function () {
-      return null;
-    },
-    hard: function () {
-      return null;
-    },
+    easy: "a chart-topping hit song",
+    medium: "a classic song from a specific genre",
+    hard: "an obscure or experimental song",
   },
   {
-    name: "Video games from 90s",
-    easy: function () {
-      return null;
-    },
-    medium: function () {
-      return null;
-    },
-    hard: function () {
-      return null;
-    },
+    name: "TV Shows",
+    easy: "a popular current TV series",
+    medium: "a cult classic TV show",
+    hard: "a short-lived or foreign TV series",
   },
   {
-    name: "Fantasy Characters",
-    easy: function () {
-      return null;
-    },
-    medium: function () {
-      return null;
-    },
-    hard: function () {
-      return null;
-    },
+    name: "Music Artists",
+    easy: "a mainstream pop star",
+    medium: "an influential musician in a specific genre",
+    hard: "an underground or avant-garde artist",
+  },
+  {
+    name: "Video Games from 90s",
+    easy: "a popular 90s console game",
+    medium: "a cult classic 90s PC game",
+    hard: "an obscure or niche 90s video game",
+  },
+  {
+    name: "Fictional Characters",
+    easy: "a widely recognized fictional character",
+    medium: "a popular character from a specific fandom",
+    hard: "a lesser-known character from literature or media",
+  },
+  {
+    name: "Celebrities",
+    easy: "a current A-list celebrity",
+    medium: "a famous person from a specific field",
+    hard: "a historical figure or niche celebrity",
+  },
+  {
+    name: "Famous Landmarks",
+    easy: "an iconic global landmark",
+    medium: "a notable national monument",
+    hard: "a lesser-known but significant local landmark",
+  },
+  {
+    name: "Brands",
+    easy: "a globally recognized brand",
+    medium: "a popular brand in a specific industry",
+    hard: "a niche or luxury brand",
+  },
+  {
+    name: "Books & Authors",
+    easy: "a bestselling author or famous book",
+    medium: "a critically acclaimed literary work",
+    hard: "an obscure or avant-garde piece of literature",
+  },
+  {
+    name: "Cartoons & Animation",
+    easy: "a popular current or classic cartoon",
+    medium: "a cult animated series",
+    hard: "an obscure or adult-oriented animated show",
+  },
+  {
+    name: "Sports Teams",
+    easy: "a world-famous sports team",
+    medium: "a national league team",
+    hard: "a minor league or niche sports team",
+  },
+  {
+    name: "Mythology & Folklore",
+    easy: "a well-known mythological figure",
+    medium: "a mythological creature or legend",
+    hard: "an obscure myth or folklore tale",
+  },
+  {
+    name: "Technology",
+    easy: "a common tech gadget",
+    medium: "a specific tech innovation",
+    hard: "an emerging or complex technology",
+  },
+  {
+    name: "Food & Drinks",
+    easy: "a popular international dish",
+    medium: "a regional specialty",
+    hard: "a rare or exotic culinary item",
+  },
+  {
+    name: "Superheroes & Villains",
+    easy: "a mainstream superhero or villain",
+    medium: "a lesser-known comic book character",
+    hard: "an obscure or alternate version of a hero/villain",
   },
   {
     name: "Historical Figures",
-    easy: function () {
-      return null;
-    },
-    medium: function () {
-      return null;
-    },
-    hard: function () {
-      return null;
-    },
+    easy: "a well-known historical figure",
+    medium: "a significant but less famous historical figure",
+    hard: "an obscure historical figure",
   },
-] satisfies Category[];
+  {
+    name: "Animals",
+    easy: "a common household pet or farm animal",
+    medium: "a wild animal from a specific ecosystem",
+    hard: "a rare or endangered species",
+  },
+  {
+    name: "Internet Trends",
+    easy: "a viral meme or social media trend",
+    medium: "a popular internet subculture",
+    hard: "an obscure or niche online phenomenon",
+  },
+  {
+    name: "Fashion",
+    easy: "a common clothing item or accessory",
+    medium: "a specific fashion trend or style",
+    hard: "an avant-garde or haute couture design",
+  },
+  {
+    name: "Vehicles",
+    easy: "a common car model or type",
+    medium: "a specific vehicle from a niche category",
+    hard: "a rare or concept vehicle",
+  },
+  {
+    name: "Science",
+    easy: "a basic scientific concept",
+    medium: "a specific scientific theory or discovery",
+    hard: "a complex or cutting-edge scientific topic",
+  },
+  {
+    name: "Board Games",
+    easy: "a classic or popular board game",
+    medium: "a strategy or hobby board game",
+    hard: "an obscure or complex board game",
+  },
+  {
+    name: "Mobile Apps",
+    easy: "a widely used mobile app",
+    medium: "a popular app in a specific category",
+    hard: "a niche or innovative mobile app",
+  },
+  {
+    name: "Fantasy Worlds",
+    easy: "a well-known fantasy world from literature or media",
+    medium: "a less famous but established fantasy setting",
+    hard: "an obscure or complex fantasy universe",
+  },
+  {
+    name: "Fantasy Characters",
+    easy: "a famous fantasy character",
+    medium: "a supporting character from a popular fantasy series",
+    hard: "an obscure or complex fantasy character",
+  },
+  {
+    name: "Political Figures",
+    easy: "a well-known current political leader",
+    medium: "a significant historical political figure",
+    hard: "an obscure or controversial political figure",
+  },
+  {
+    name: "Languages",
+    easy: "a widely spoken global language",
+    medium: "a regional or less common language",
+    hard: "an endangered or ancient language",
+  },
+  {
+    name: "Countries",
+    easy: "a major world power or popular tourist destination",
+    medium: "a developing nation or smaller European country",
+    hard: "a micronation or disputed territory",
+  },
+  {
+    name: "Cities",
+    easy: "a famous global metropolis",
+    medium: "a notable regional capital or cultural hub",
+    hard: "an obscure or historical city",
+  },
+  {
+    name: "Inventions",
+    easy: "a common household invention",
+    medium: "a significant historical invention",
+    hard: "a recent or niche technological innovation",
+  },
+  {
+    name: "Holidays & Traditions",
+    easy: "a widely celebrated international holiday",
+    medium: "a national holiday or cultural tradition",
+    hard: "an obscure local custom or historical observance",
+  },
+  {
+    name: "Musical Instruments",
+    easy: "a common orchestral or band instrument",
+    medium: "a traditional instrument from a specific culture",
+    hard: "a rare or experimental musical instrument",
+  },
+  {
+    name: "Astrology & Zodiac Signs",
+    easy: "a well-known zodiac sign",
+    medium: "an astrological concept or term",
+    hard: "an obscure astrological system or belief",
+  },
+  {
+    name: "Festivals & Events",
+    easy: "a major international festival or event",
+    medium: "a notable regional celebration",
+    hard: "an obscure or niche cultural event",
+  },
+  {
+    name: "Plants & Trees",
+    easy: "a common houseplant or garden flower",
+    medium: "a specific tree species or exotic plant",
+    hard: "a rare or endangered plant species",
+  },
+  {
+    name: "Universities & Colleges",
+    easy: "a world-renowned university",
+    medium: "a well-known national college",
+    hard: "a specialized or niche educational institution",
+  },
+  {
+    name: "Comic Books",
+    easy: "a popular superhero comic",
+    medium: "a critically acclaimed graphic novel",
+    hard: "an underground or indie comic",
+  },
+  {
+    name: "Video Game Characters",
+    easy: "an iconic video game protagonist",
+    medium: "a popular supporting character",
+    hard: "an obscure or retro game character",
+  },
+  {
+    name: "Currencies",
+    easy: "a major global currency",
+    medium: "a regional or less common currency",
+    hard: "a historical or defunct currency",
+  },
+  {
+    name: "Space Exploration",
+    easy: "a famous space mission",
+    medium: "a space exploration technology",
+    hard: "a theoretical concept in space travel",
+  },
+  {
+    name: "Robots & AI",
+    easy: "a well-known AI assistant",
+    medium: "a famous robot from media",
+    hard: "an advanced AI concept or algorithm",
+  },
+  {
+    name: "TV Hosts",
+    easy: "a popular current talk show host",
+    medium: "a game show or reality TV host",
+    hard: "a niche or historical TV presenter",
+  },
+  {
+    name: "Famous Painters",
+    easy: "a renowned Renaissance artist",
+    medium: "a well-known modern painter",
+    hard: "an avant-garde or lesser-known artist",
+  },
+  {
+    name: "Famous Sculptures",
+    easy: "an iconic ancient sculpture",
+    medium: "a well-known modern sculpture",
+    hard: "an abstract or controversial piece",
+  },
+  {
+    name: "Dancers & Choreographers",
+    easy: "a famous ballet dancer",
+    medium: "a renowned contemporary choreographer",
+    hard: "an innovative or niche dance artist",
+  },
+  {
+    name: "Magicians & Illusionists",
+    easy: "a world-famous magician",
+    medium: "a popular stage illusionist",
+    hard: "a specialized or historical magic performer",
+  },
+  {
+    name: "Stand-up Comedians",
+    easy: "a globally recognized comedian",
+    medium: "a popular national comic",
+    hard: "an up-and-coming or alternative comedian",
+  },
+  {
+    name: "Supernatural Creatures",
+    easy: "a common mythical creature",
+    medium: "a folklore-specific supernatural being",
+    hard: "an obscure or regional mythical entity",
+  },
+  {
+    name: "Board Games",
+    easy: "a classic family board game",
+    medium: "a popular strategy game",
+    hard: "an obscure or complex board game",
+  },
+  {
+    name: "Weapons",
+    easy: "a common modern firearm",
+    medium: "a historical weapon",
+    hard: "an exotic or specialized weapon",
+  },
+  {
+    name: "Time Periods",
+    easy: "a major historical era",
+    medium: "a specific decade or century",
+    hard: "an obscure or brief historical period",
+  },
+  {
+    name: "Furniture & Decor",
+    easy: "a common household furniture item",
+    medium: "a specific interior design style",
+    hard: "a rare or antique furniture piece",
+  },
+  {
+    name: "Board Sports",
+    easy: "a popular skateboarding trick",
+    medium: "a snowboarding technique",
+    hard: "an obscure or extreme board sport move",
+  },
+  {
+    name: "Extreme Sports",
+    easy: "a well-known extreme sport",
+    medium: "a specific extreme sport technique",
+    hard: "a niche or emerging extreme sport",
+  },
+  {
+    name: "Mythological Creatures",
+    easy: "a famous mythological beast",
+    medium: "a culture-specific mythical creature",
+    hard: "an obscure mythological entity",
+  },
+  {
+    name: "Dungeons & Dragons Classes",
+    easy: "a basic D&D character class",
+    medium: "a specialized or multi-class character",
+    hard: "a rare or homebrew D&D class",
+  },
+  {
+    name: "Natural Disasters",
+    easy: "a common type of natural disaster",
+    medium: "a specific historical disaster",
+    hard: "a rare or localized natural phenomenon",
+  },
+  {
+    name: "Modes of Transportation",
+    easy: "a common vehicle type",
+    medium: "a specific model of transportation",
+    hard: "an experimental or futuristic mode of travel",
+  },
+  {
+    name: "Famous Bridges",
+    easy: "an iconic international bridge",
+    medium: "a notable national bridge",
+    hard: "a lesser-known but historically significant bridge",
+  },
+  {
+    name: "Architecture Styles",
+    easy: "a common architectural style",
+    medium: "a period-specific architectural movement",
+    hard: "an obscure or regional architectural style",
+  },
+  {
+    name: "Perfumes & Colognes",
+    easy: "a popular designer fragrance",
+    medium: "a classic or vintage scent",
+    hard: "a niche or artisanal perfume",
+  },
+  {
+    name: "Luxury Brands",
+    easy: "a globally recognized luxury brand",
+    medium: "a high-end designer label",
+    hard: "an exclusive or niche luxury brand",
+  },
+  {
+    name: "Spices & Herbs",
+    easy: "a common cooking spice",
+    medium: "a culture-specific herb",
+    hard: "a rare or exotic spice",
+  },
+  {
+    name: "Cooking Techniques",
+    easy: "a basic cooking method",
+    medium: "a specific culinary technique",
+    hard: "an advanced or molecular gastronomy method",
+  },
+  {
+    name: "Programming Languages",
+    easy: "a widely-used programming language",
+    medium: "a specialized or industry-specific language",
+    hard: "an esoteric or academic programming language",
+  },
+  {
+    name: "Art Styles",
+    easy: "a famous art movement",
+    medium: "a specific artistic technique",
+    hard: "an obscure or avant-garde art style",
+  },
+  {
+    name: "Streaming Platforms",
+    easy: "a major streaming service",
+    medium: "a niche or regional streaming platform",
+    hard: "an emerging or specialized streaming service",
+  },
+  {
+    name: "Podcasts",
+    easy: "a chart-topping podcast",
+    medium: "a popular genre-specific podcast",
+    hard: "a niche or independent podcast",
+  },
+  {
+    name: "Famous Architects",
+    easy: "a world-renowned architect",
+    medium: "an influential modern architect",
+    hard: "a lesser-known but innovative architect",
+  },
+  {
+    name: "Jewelry & Accessories",
+    easy: "a common jewelry item",
+    medium: "a specific gemstone or precious metal",
+    hard: "a rare or antique piece of jewelry",
+  },
+  {
+    name: "Historic Battles",
+    easy: "a famous world war battle",
+    medium: "a significant regional conflict",
+    hard: "an obscure or ancient battle",
+  },
+  {
+    name: "Historical Dynasties",
+    easy: "a well-known royal dynasty",
+    medium: "a significant regional ruling family",
+    hard: "an obscure or short-lived dynasty",
+  },
+  {
+    name: "Desserts & Sweets",
+    easy: "a popular international dessert",
+    medium: "a culture-specific sweet treat",
+    hard: "a rare or complex confection",
+  },
+  {
+    name: "Non-Profit Organizations",
+    easy: "a globally recognized charity",
+    medium: "a national non-profit organization",
+    hard: "a specialized or local non-profit",
+  },
+  {
+    name: "Famous Speeches",
+    easy: "an iconic historical speech",
+    medium: "a well-known political address",
+    hard: "a lesser-known but impactful oration",
+  },
+  {
+    name: "Olympic Games",
+    easy: "a popular Olympic sport",
+    medium: "a specific Olympic event",
+    hard: "a discontinued or demonstration Olympic sport",
+  },
+  {
+    name: "Classic Novels",
+    easy: "a widely read classic novel",
+    medium: "a well-regarded literary work",
+    hard: "an obscure or challenging classic",
+  },
+  {
+    name: "Board Game Mechanics",
+    easy: "a common board game rule",
+    medium: "a specific game mechanic",
+    hard: "an innovative or complex game mechanism",
+  },
+  {
+    name: "Monsters from Movies",
+    easy: "an iconic movie monster",
+    medium: "a cult classic movie creature",
+    hard: "an obscure or indie film monster",
+  },
+  {
+    name: "Construction Equipment",
+    easy: "a common construction vehicle",
+    medium: "a specific type of construction tool",
+    hard: "a specialized or high-tech construction equipment",
+  },
+  {
+    name: "Marine Life",
+    easy: "a well-known sea creature",
+    medium: "a specific species of fish",
+    hard: "a rare or deep-sea organism",
+  },
+  {
+    name: "Pirates & Sailors",
+    easy: "a famous historical pirate",
+    medium: "a notable naval commander",
+    hard: "an obscure maritime figure",
+  },
+  {
+    name: "Iconic Vehicles from Movies",
+    easy: "a famous movie car",
+    medium: "a recognizable sci-fi vehicle",
+    hard: "an obscure or custom movie vehicle",
+  },
+  {
+    name: "Celebrity Scandals",
+    easy: "a high-profile recent scandal",
+    medium: "a well-known historical controversy",
+    hard: "an obscure or forgotten celebrity incident",
+  },
+  {
+    name: "Rivers & Oceans",
+    easy: "a major world river or ocean",
+    medium: "a significant regional waterway",
+    hard: "an obscure or remote body of water",
+  },
+  {
+    name: "Mountains & Peaks",
+    easy: "a famous mountain range",
+    medium: "a well-known individual peak",
+    hard: "an obscure or technically challenging summit",
+  },
+  {
+    name: "Famous Kings & Queens",
+    easy: "a widely known monarch",
+    medium: "a significant historical ruler",
+    hard: "an obscure or lesser-known royal figure",
+  },
+  {
+    name: "Knights & Warriors",
+    easy: "a famous historical warrior",
+    medium: "a specific type of medieval knight",
+    hard: "an obscure or legendary fighter",
+  },
+  {
+    name: "Aliens & UFOs",
+    easy: "a popular alien depiction in media",
+    medium: "a well-known UFO incident",
+    hard: "an obscure extraterrestrial theory",
+  },
+  {
+    name: "National Parks",
+    easy: "a famous national park",
+    medium: "a notable state or regional park",
+    hard: "a remote or less-visited protected area",
+  },
+  {
+    name: "Space Missions",
+    easy: "a famous space mission",
+    medium: "a specific space probe or satellite",
+    hard: "an obscure or failed space mission",
+  },
+  {
+    name: "Conspiracy Theories",
+    easy: "a widely known conspiracy theory",
+    medium: "a popular fringe belief",
+    hard: "an obscure or niche conspiracy claim",
+  },
+  {
+    name: "Famous Duos",
+    easy: "an iconic pair from pop culture",
+    medium: "a well-known historical or literary duo",
+    hard: "an obscure or unexpected famous pair",
+  },
+  {
+    name: "Cultural Dances",
+    easy: "a globally recognized dance style",
+    medium: "a traditional dance from a specific culture",
+    hard: "an obscure or ritualistic dance form",
+  },
+  {
+    name: "Historical Eras",
+    easy: "a major historical period",
+    medium: "a specific century or decade",
+    hard: "an obscure or brief historical era",
+  },
+  {
+    name: "Pirates",
+    easy: "a famous historical pirate",
+    medium: "a specific type of pirate ship",
+    hard: "an obscure pirate custom or term",
+  },
+  {
+    name: "Haunted Places",
+    easy: "a famous haunted house or castle",
+    medium: "a well-known ghost town",
+    hard: "an obscure or locally famous haunted location",
+  },
+  {
+    name: "Endangered Species",
+    easy: "a well-known endangered animal",
+    medium: "a threatened plant species",
+    hard: "a critically endangered or recently discovered species",
+  },
+];
