@@ -43,7 +43,7 @@ export default function Home() {
               new Set([
                 ...(next.get(concept.category) as Set<string>),
                 concept.name,
-              ])
+              ]),
             );
           }
         }

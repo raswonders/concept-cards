@@ -1,129 +1,129 @@
 type Category = {
-  name: string,
+  name: string;
   easy: () => string | null;
   medium: () => string | null;
   hard: () => string | null;
-}
+};
 
 export const wildcardCategory = {
   name: "Miscellaneous",
-  easy: function() {
+  easy: function () {
     return `generate a common word from category ${this.name}`;
   },
-  medium: function() {
+  medium: function () {
     return `generate a common word for advanced concept from category ${this.name}`;
   },
-  hard: function() {
+  hard: function () {
     return `generate a less common word from category ${this.name}`;
   },
-}
+};
 
 export const categories = [
   {
     name: "Actors and directors",
-    easy: function() {
+    easy: function () {
       return `generate a famous name from category ${this.name}`;
     },
-    medium: function() {
+    medium: function () {
       return null;
     },
-    hard: function() {
+    hard: function () {
       return `generate a less known name from category ${this.name}`;
     },
   },
   {
     name: "Movies",
-    easy: function() {
+    easy: function () {
       return null;
     },
-    medium: function() {
+    medium: function () {
       return null;
     },
-    hard: function() {
+    hard: function () {
       return null;
     },
   },
   {
     name: "Writers",
-    easy: function() {
+    easy: function () {
       return null;
     },
-    medium: function() {
+    medium: function () {
       return null;
     },
-    hard: function() {
+    hard: function () {
       return null;
     },
   },
   {
     name: "Superheroes and Villains",
-    easy: function() {
+    easy: function () {
       return null;
     },
-    medium: function() {
+    medium: function () {
       return null;
     },
-    hard: function() {
+    hard: function () {
       return null;
     },
   },
   {
     name: "Musicians",
-    easy: function() {
+    easy: function () {
       return null;
     },
-    medium: function() {
+    medium: function () {
       return null;
     },
-    hard: function() {
+    hard: function () {
       return null;
     },
   },
   {
     name: "Songs",
-    easy: function() {
+    easy: function () {
       return null;
     },
-    medium: function() {
+    medium: function () {
       return null;
     },
-    hard: function() {
+    hard: function () {
       return null;
     },
   },
   {
     name: "Video games from 90s",
-    easy: function() {
+    easy: function () {
       return null;
     },
-    medium: function() {
+    medium: function () {
       return null;
     },
-    hard: function() {
+    hard: function () {
       return null;
     },
   },
   {
     name: "Fantasy Characters",
-    easy: function() {
+    easy: function () {
       return null;
     },
-    medium: function() {
+    medium: function () {
       return null;
     },
-    hard: function() {
+    hard: function () {
       return null;
     },
   },
   {
     name: "Historical Figures",
-    easy: function() {
+    easy: function () {
       return null;
     },
-    medium: function() {
+    medium: function () {
       return null;
     },
-    hard: function() {
+    hard: function () {
       return null;
     },
   },

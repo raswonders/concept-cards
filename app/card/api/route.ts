@@ -12,14 +12,14 @@ export async function POST(req: Request) {
   const conceptsHistory = parseHistory(body);
   const prompt = createPrompt(conceptsHistory);
 
-  console.log("querying model...")
-  console.log({ prompt })
+  console.log("querying model...");
+  console.log({ prompt });
   const { object } = await generateObject({
     model: openai(modelName),
     prompt,
     schema: CardSchema,
     temperature: 1,
-  })
+  });
 
   return NextResponse.json(object);
 }
