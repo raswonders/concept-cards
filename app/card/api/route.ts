@@ -1,9 +1,9 @@
 import { openai } from "@ai-sdk/openai";
 import { generateObject } from "ai";
 import { NextResponse } from "next/server";
-import { CardSchema } from "@/app/cardSchema";
 import { parseHistory } from "@/lib/history";
 import { createPrompt } from "@/lib/prompt";
+import { CardSchema } from "@/lib/cardSchema";
 
 const modelName = "gpt-4o-2024-08-06";
 

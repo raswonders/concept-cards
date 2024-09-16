@@ -1,7 +1,7 @@
 "use client";
 
 import { experimental_useObject as useObject } from "ai/react";
-import { CardSchema, CardSchemaType } from "./cardSchema";
+import { CardSchema, CardSchemaType } from "../lib/cardSchema";
 import { useEffect, useState } from "react";
 import { History, parseHistory, serializeHistory } from "../lib/history";
 import { Button } from "@/components/ui/button";

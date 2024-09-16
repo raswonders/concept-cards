@@ -1,4 +1,4 @@
-import { CardSchemaType } from "../../app/cardSchema";
+import { CardSchemaType } from "../../lib/cardSchema";
 import { Skeleton } from "./skeleton";
 
 interface Props {
