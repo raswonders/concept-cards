@@ -1,10 +1,22 @@
 export type History = Map<string, Set<string>>;
+export type HistorySerializable = [string, string[]][];
+
+export function toSerializableHistory(data: History) {
+  const array = Array.from(data);
+  return array.map(([key, value]) => [key, Array.from(value)]);
+}
+
+export function fromSerializableHistory(data: HistorySerializable) {
+  const array = data.map(([key, value]): [string, Set<string>] => [
+    key,
+    new Set(value),
+  ]);
+  return new Map(array);
+}
 
 export function serializeHistory(data: History) {
   try {
-    const array = Array.from(data);
-    const result = array.map(([key, value]) => [key, Array.from(value)]);
-    const json = JSON.stringify(result);
+    const json = JSON.stringify(toSerializableHistory(data));
     return json;
   } catch (error) {
     console.error("Couldn't serialize", data, error);
@@ -14,13 +26,8 @@ export function serializeHistory(data: History) {
 
 export function parseHistory(str: string) {
   try {
-    const data = JSON.parse(str) as [string, string[]][];
-    const array = data.map(([key, value]): [string, Set<string>] => [
-      key,
-      new Set(value),
-    ]);
-    const result = new Map(array);
-    return result;
+    const data = JSON.parse(str) as HistorySerializable;
+    return fromSerializableHistory(data);
   } catch (error) {
     console.error("Couldn't parse", str, error);
     return new Map();

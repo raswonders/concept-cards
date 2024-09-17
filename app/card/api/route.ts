@@ -1,7 +1,7 @@
 import { openai } from "@ai-sdk/openai";
 import { generateObject } from "ai";
 import { NextResponse } from "next/server";
-import { parseHistory } from "@/lib/history";
+import { fromSerializableHistory, parseHistory } from "@/lib/history";
 import { createPrompt } from "@/lib/prompt";
 import { CardSchema } from "@/lib/cardSchema";
 
@@ -9,8 +9,10 @@ const modelName = "gpt-4o-2024-08-06";
 
 export async function POST(req: Request) {
   const body = await req.json();
-  const conceptsHistory = parseHistory(body);
-  const prompt = createPrompt(conceptsHistory);
+
+  const conceptsHistory = fromSerializableHistory(body.history);
+  const categoryName = body.categoryName;
+  const prompt = createPrompt(categoryName, conceptsHistory);
 
   console.log("querying model...");
   console.log({ prompt });

@@ -9,7 +9,20 @@ const difficultyMatrix = {
 };
 const difficulties = ["easy", "medium", "hard"];
 
-export function createPrompt(history: History) {
+export function createPrompt(categoryName: string, history: History) {
+  if (categoryName) {
+    const category = categories.find(
+      (category) => category.name === categoryName
+    );
+    return category
+      ? createSingleCatPrompt(category, history)
+      : createMultiCatPrompt(history);
+  }
+
+  return createMultiCatPrompt(history);
+}
+
+function createMultiCatPrompt(history: History) {
   let prompt = "";
 
   for (const difficulty of difficulties) {
@@ -39,7 +52,7 @@ export function createPrompt(history: History) {
   return prompt;
 }
 
-export function createSingleCatPrompt(
+function createSingleCatPrompt(
   category: Category,
   history: History = new Map()
 ) {

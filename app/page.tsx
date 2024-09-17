@@ -3,14 +3,29 @@
 import { experimental_useObject as useObject } from "ai/react";
 import { CardSchema, CardSchemaType } from "../lib/cardSchema";
 import { useEffect, useState } from "react";
-import { History, parseHistory, serializeHistory } from "../lib/history";
+import {
+  History,
+  parseHistory,
+  serializeHistory,
+  toSerializableHistory,
+} from "../lib/history";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { NamesList } from "@/components/ui/names-list";
+import { SelectCategory } from "@/components/ui/select-category";
+
+function createRequestBody(categoryName: string, history: History) {
+  const requestBody = {
+    categoryName,
+    history: toSerializableHistory(history),
+  };
+
+  return requestBody;
+}
 
 export default function Home() {
   const [conceptsHistory, setConceptsHistory] = useState<History>(new Map());
-
+  const [categoryName, setCategoryName] = useState("");
   const { object, submit, isLoading, error } = useObject({
     api: "/card/api",
     schema: CardSchema,
@@ -23,10 +38,8 @@ export default function Home() {
     const savedHistory = localStorage.getItem("conceptsHistory");
     if (savedHistory) {
       setConceptsHistory(parseHistory(savedHistory));
-      submit(savedHistory);
     } else {
       setConceptsHistory(new Map());
-      submit("");
     }
   }, []);
 
@@ -43,7 +56,7 @@ export default function Home() {
               new Set([
                 ...(next.get(concept.category) as Set<string>),
                 concept.name,
-              ]),
+              ])
             );
           }
         }
@@ -56,7 +69,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen flex justify-center">
-      <main className="min-w-0 w-full max-w-[46ch] py-10 p-6 flex flex-col gap-6 items-center">
+      <main className="min-w-0 w-full max-w-[46ch] py-10 p-6 flex flex-col gap-4 items-center">
         <Card className="w-full pt-6">
           <CardContent>
             {!error && (
@@ -67,12 +80,22 @@ export default function Home() {
             )}
           </CardContent>
         </Card>
-        <Button
-          disabled={isLoading}
-          onClick={() => submit(serializeHistory(conceptsHistory))}
-        >
-          Next Card
-        </Button>
+        <div className="w-full space-y-4">
+          <SelectCategory
+            isLoading={isLoading}
+            value={categoryName}
+            onValueChange={setCategoryName}
+          />
+          <Button
+            className="w-full"
+            disabled={isLoading}
+            onClick={() => {
+              submit(createRequestBody(categoryName, conceptsHistory));
+            }}
+          >
+            New Card
+          </Button>
+        </div>
       </main>
     </div>
   );
