@@ -1,7 +1,7 @@
 import { openai } from "@ai-sdk/openai";
 import { generateObject } from "ai";
 import { NextResponse } from "next/server";
-import { fromSerializableHistory, parseHistory } from "@/lib/history";
+import { fromSerializableHistory } from "@/lib/history";
 import { createPrompt } from "@/lib/prompt";
 import { CardSchema } from "@/lib/cardSchema";
 

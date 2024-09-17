@@ -20,9 +20,13 @@ export function SelectCategory({ isLoading, value, onValueChange }: Props) {
         <SelectValue placeholder="Select Category" />
       </SelectTrigger>
       <SelectContent>
-        <SelectItem value="random">__Random Category__</SelectItem>
+        <SelectItem key="random" value="random">
+          __Random Category__
+        </SelectItem>
         {categories.map((category) => (
-          <SelectItem value={category.name}>{category.name}</SelectItem>
+          <SelectItem key={category.name} value={category.name}>
+            {category.name}
+          </SelectItem>
         ))}
       </SelectContent>
     </Select>
