@@ -266,12 +266,6 @@ export const categories: Category[] = [
     hard: "a historical or defunct currency",
   },
   {
-    name: "Space Exploration",
-    easy: "a famous space mission",
-    medium: "a space exploration technology",
-    hard: "a theoretical concept in space travel",
-  },
-  {
     name: "Famous Painters",
     easy: "a renowned Renaissance artist",
     medium: "a well-known modern painter",
@@ -444,12 +438,6 @@ export const categories: Category[] = [
     easy: "an iconic pair from pop culture",
     medium: "a well-known historical or literary duo",
     hard: "an obscure or unexpected famous pair",
-  },
-  {
-    name: "Cultural Dances",
-    easy: "a globally recognized dance style",
-    medium: "a traditional dance from a specific culture",
-    hard: "an obscure or ritualistic dance form",
   },
   {
     name: "Historical Eras",
