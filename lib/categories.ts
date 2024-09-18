@@ -182,12 +182,6 @@ export const categories: Category[] = [
     hard: "an obscure or niche online phenomenon",
   },
   {
-    name: "Fashion",
-    easy: "a common clothing item or accessory",
-    medium: "a specific fashion trend or style",
-    hard: "an avant-garde or haute couture design",
-  },
-  {
     name: "Vehicles",
     easy: "a common car model or type",
     medium: "a specific vehicle from a niche category",
@@ -204,12 +198,6 @@ export const categories: Category[] = [
     easy: "a classic or popular board game",
     medium: "a strategy or hobby board game",
     hard: "an obscure or complex board game",
-  },
-  {
-    name: "Mobile Apps",
-    easy: "a widely used mobile app",
-    medium: "a popular app in a specific category",
-    hard: "a niche or innovative mobile app",
   },
   {
     name: "Fantasy Worlds",
@@ -230,12 +218,6 @@ export const categories: Category[] = [
     hard: "an obscure or controversial political figure",
   },
   {
-    name: "Languages",
-    easy: "a widely spoken global language",
-    medium: "a regional or less common language",
-    hard: "an endangered or ancient language",
-  },
-  {
     name: "Countries",
     easy: "a major world power or popular tourist destination",
     medium: "a developing nation or smaller European country",
@@ -254,12 +236,6 @@ export const categories: Category[] = [
     hard: "a recent or niche technological innovation",
   },
   {
-    name: "Holidays & Traditions",
-    easy: "a widely celebrated international holiday",
-    medium: "a national holiday or cultural tradition",
-    hard: "an obscure local custom or historical observance",
-  },
-  {
     name: "Musical Instruments",
     easy: "a common orchestral or band instrument",
     medium: "a traditional instrument from a specific culture",
@@ -272,28 +248,10 @@ export const categories: Category[] = [
     hard: "an obscure astrological system or belief",
   },
   {
-    name: "Festivals & Events",
-    easy: "a major international festival or event",
-    medium: "a notable regional celebration",
-    hard: "an obscure or niche cultural event",
-  },
-  {
     name: "Plants & Trees",
     easy: "a common houseplant or garden flower",
     medium: "a specific tree species or exotic plant",
     hard: "a rare or endangered plant species",
-  },
-  {
-    name: "Universities & Colleges",
-    easy: "a world-renowned university",
-    medium: "a well-known national college",
-    hard: "a specialized or niche educational institution",
-  },
-  {
-    name: "Comic Books",
-    easy: "a popular superhero comic",
-    medium: "a critically acclaimed graphic novel",
-    hard: "an underground or indie comic",
   },
   {
     name: "Video Game Characters",
@@ -314,46 +272,16 @@ export const categories: Category[] = [
     hard: "a theoretical concept in space travel",
   },
   {
-    name: "Robots & AI",
-    easy: "a well-known AI assistant",
-    medium: "a famous robot from media",
-    hard: "an advanced AI concept or algorithm",
-  },
-  {
-    name: "TV Hosts",
-    easy: "a popular current talk show host",
-    medium: "a game show or reality TV host",
-    hard: "a niche or historical TV presenter",
-  },
-  {
     name: "Famous Painters",
     easy: "a renowned Renaissance artist",
     medium: "a well-known modern painter",
     hard: "an avant-garde or lesser-known artist",
   },
   {
-    name: "Famous Sculptures",
-    easy: "an iconic ancient sculpture",
-    medium: "a well-known modern sculpture",
-    hard: "an abstract or controversial piece",
-  },
-  {
-    name: "Dancers & Choreographers",
-    easy: "a famous ballet dancer",
-    medium: "a renowned contemporary choreographer",
-    hard: "an innovative or niche dance artist",
-  },
-  {
-    name: "Magicians & Illusionists",
-    easy: "a world-famous magician",
-    medium: "a popular stage illusionist",
-    hard: "a specialized or historical magic performer",
-  },
-  {
-    name: "Stand-up Comedians",
-    easy: "a globally recognized comedian",
-    medium: "a popular national comic",
-    hard: "an up-and-coming or alternative comedian",
+    name: "Art",
+    easy: "an iconic piece of art",
+    medium: "a well-known art",
+    hard: "a less known art piece",
   },
   {
     name: "Supernatural Creatures",
@@ -380,34 +308,16 @@ export const categories: Category[] = [
     hard: "an obscure or brief historical period",
   },
   {
-    name: "Furniture & Decor",
-    easy: "a common household furniture item",
-    medium: "a specific interior design style",
-    hard: "a rare or antique furniture piece",
-  },
-  {
-    name: "Board Sports",
-    easy: "a popular skateboarding trick",
-    medium: "a snowboarding technique",
-    hard: "an obscure or extreme board sport move",
-  },
-  {
-    name: "Extreme Sports",
-    easy: "a well-known extreme sport",
-    medium: "a specific extreme sport technique",
-    hard: "a niche or emerging extreme sport",
+    name: "Sports",
+    easy: "a well-known sport",
+    medium: "a less known sport ",
+    hard: "a less known extreme sport",
   },
   {
     name: "Mythological Creatures",
     easy: "a famous mythological beast",
     medium: "a culture-specific mythical creature",
     hard: "an obscure mythological entity",
-  },
-  {
-    name: "Dungeons & Dragons Classes",
-    easy: "a basic D&D character class",
-    medium: "a specialized or multi-class character",
-    hard: "a rare or homebrew D&D class",
   },
   {
     name: "Natural Disasters",
@@ -434,46 +344,10 @@ export const categories: Category[] = [
     hard: "an obscure or regional architectural style",
   },
   {
-    name: "Perfumes & Colognes",
-    easy: "a popular designer fragrance",
-    medium: "a classic or vintage scent",
-    hard: "a niche or artisanal perfume",
-  },
-  {
-    name: "Luxury Brands",
-    easy: "a globally recognized luxury brand",
-    medium: "a high-end designer label",
-    hard: "an exclusive or niche luxury brand",
-  },
-  {
     name: "Spices & Herbs",
     easy: "a common cooking spice",
     medium: "a culture-specific herb",
     hard: "a rare or exotic spice",
-  },
-  {
-    name: "Cooking Techniques",
-    easy: "a basic cooking method",
-    medium: "a specific culinary technique",
-    hard: "an advanced or molecular gastronomy method",
-  },
-  {
-    name: "Programming Languages",
-    easy: "a widely-used programming language",
-    medium: "a specialized or industry-specific language",
-    hard: "an esoteric or academic programming language",
-  },
-  {
-    name: "Art Styles",
-    easy: "a famous art movement",
-    medium: "a specific artistic technique",
-    hard: "an obscure or avant-garde art style",
-  },
-  {
-    name: "Streaming Platforms",
-    easy: "a major streaming service",
-    medium: "a niche or regional streaming platform",
-    hard: "an emerging or specialized streaming service",
   },
   {
     name: "Podcasts",
@@ -488,40 +362,16 @@ export const categories: Category[] = [
     hard: "a lesser-known but innovative architect",
   },
   {
-    name: "Jewelry & Accessories",
-    easy: "a common jewelry item",
-    medium: "a specific gemstone or precious metal",
-    hard: "a rare or antique piece of jewelry",
-  },
-  {
-    name: "Historic Battles",
-    easy: "a famous world war battle",
-    medium: "a significant regional conflict",
-    hard: "an obscure or ancient battle",
-  },
-  {
     name: "Historical Dynasties",
     easy: "a well-known royal dynasty",
     medium: "a significant regional ruling family",
-    hard: "an obscure or short-lived dynasty",
+    hard: "less significant or short-lived dynasty",
   },
   {
     name: "Desserts & Sweets",
     easy: "a popular international dessert",
     medium: "a culture-specific sweet treat",
     hard: "a rare or complex confection",
-  },
-  {
-    name: "Non-Profit Organizations",
-    easy: "a globally recognized charity",
-    medium: "a national non-profit organization",
-    hard: "a specialized or local non-profit",
-  },
-  {
-    name: "Famous Speeches",
-    easy: "an iconic historical speech",
-    medium: "a well-known political address",
-    hard: "a lesser-known but impactful oration",
   },
   {
     name: "Olympic Games",
@@ -536,46 +386,16 @@ export const categories: Category[] = [
     hard: "an obscure or challenging classic",
   },
   {
-    name: "Board Game Mechanics",
-    easy: "a common board game rule",
-    medium: "a specific game mechanic",
-    hard: "an innovative or complex game mechanism",
-  },
-  {
     name: "Monsters from Movies",
     easy: "an iconic movie monster",
     medium: "a cult classic movie creature",
     hard: "an obscure or indie film monster",
   },
   {
-    name: "Construction Equipment",
-    easy: "a common construction vehicle",
-    medium: "a specific type of construction tool",
-    hard: "a specialized or high-tech construction equipment",
-  },
-  {
     name: "Marine Life",
     easy: "a well-known sea creature",
     medium: "a specific species of fish",
     hard: "a rare or deep-sea organism",
-  },
-  {
-    name: "Pirates & Sailors",
-    easy: "a famous historical pirate",
-    medium: "a notable naval commander",
-    hard: "an obscure maritime figure",
-  },
-  {
-    name: "Iconic Vehicles from Movies",
-    easy: "a famous movie car",
-    medium: "a recognizable sci-fi vehicle",
-    hard: "an obscure or custom movie vehicle",
-  },
-  {
-    name: "Celebrity Scandals",
-    easy: "a high-profile recent scandal",
-    medium: "a well-known historical controversy",
-    hard: "an obscure or forgotten celebrity incident",
   },
   {
     name: "Rivers & Oceans",
@@ -590,7 +410,7 @@ export const categories: Category[] = [
     hard: "an obscure or technically challenging summit",
   },
   {
-    name: "Famous Kings & Queens",
+    name: "Kings & Queens",
     easy: "a widely known monarch",
     medium: "a significant historical ruler",
     hard: "an obscure or lesser-known royal figure",
@@ -606,12 +426,6 @@ export const categories: Category[] = [
     easy: "a popular alien depiction in media",
     medium: "a well-known UFO incident",
     hard: "an obscure extraterrestrial theory",
-  },
-  {
-    name: "National Parks",
-    easy: "a famous national park",
-    medium: "a notable state or regional park",
-    hard: "a remote or less-visited protected area",
   },
   {
     name: "Space Missions",
@@ -642,23 +456,5 @@ export const categories: Category[] = [
     easy: "a major historical period",
     medium: "a specific century or decade",
     hard: "an obscure or brief historical era",
-  },
-  {
-    name: "Pirates",
-    easy: "a famous historical pirate",
-    medium: "a specific type of pirate ship",
-    hard: "an obscure pirate custom or term",
-  },
-  {
-    name: "Haunted Places",
-    easy: "a famous haunted house or castle",
-    medium: "a well-known ghost town",
-    hard: "an obscure or locally famous haunted location",
-  },
-  {
-    name: "Endangered Species",
-    easy: "a well-known endangered animal",
-    medium: "a threatened plant species",
-    hard: "a critically endangered or recently discovered species",
   },
 ];
