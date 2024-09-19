@@ -40,11 +40,16 @@ export function NamesList({ data, isLoading, difficulty }: NamesListProps) {
           height={40}
           alt={`${difficulty} difficulty icon`}
         />
-        <dl className="text-center space-y-2">
-          {sliced.map((concept) => (
-            <div key={concept.name}>
+        <dl className="text-center">
+          {sliced.map((concept, index) => (
+            <div className="flex flex-col items-center" key={concept.name}>
               <dt className="font-medium leading-tight">{concept.name}</dt>
               <dd className="text-sm text-slate-400">{concept.category}</dd>
+              {index < 2 && (
+                <div
+                  className={`w-8 border-b-8 border-dotted my-2 ${difficultyBorderColor[difficulty]}`}
+                ></div>
+              )}
             </div>
           ))}
         </dl>
