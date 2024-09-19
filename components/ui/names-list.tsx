@@ -1,5 +1,7 @@
 import { CardSchemaType } from "../../lib/cardSchema";
 import { Skeleton } from "./skeleton";
+import Image from "next/image";
+
 interface NamesListProps {
   data: CardSchemaType;
   isLoading: boolean;
@@ -29,8 +31,15 @@ export function NamesList({ data, isLoading, difficulty }: NamesListProps) {
   ) : (
     sliced.length > 0 && (
       <div
-        className={`border-2 p-2 rounded-lg ${difficultyBorderColor[difficulty]}`}
+        className={`relative border-2 p-4 rounded-lg ${difficultyBorderColor[difficulty]}`}
       >
+        <Image
+          className="absolute top-0 right-0 translate-x-1/2 -translate-y-1/2"
+          src={`/images/${difficulty}-icon.svg`}
+          width={40}
+          height={40}
+          alt={`${difficulty} difficulty icon`}
+        />
         <dl className="text-center space-y-2">
           {sliced.map((concept) => (
             <div key={concept.name}>
