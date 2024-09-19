@@ -27,11 +27,11 @@ export function NamesList({ data, isLoading, difficulty }: NamesListProps) {
   );
 
   return isLoading ? (
-    <Skeleton className="w-full h-[10rem] rounded-lg bg-primary/10" />
+    <Skeleton className="w-full h-[10rem] rounded-2xl bg-primary/10" />
   ) : (
     sliced.length > 0 && (
       <div
-        className={`relative border-2 p-4 rounded-lg ${difficultyBorderColor[difficulty]}`}
+        className={`relative border-2 p-4 rounded-2xl ${difficultyBorderColor[difficulty]}`}
       >
         <Image
           className="absolute top-0 right-0 translate-x-1/2 -translate-y-1/2"
