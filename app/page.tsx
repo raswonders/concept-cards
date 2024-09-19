@@ -100,7 +100,7 @@ export default function Home() {
             onValueChange={setCategoryName}
           />
           <Button
-            className="w-full"
+            className="w-full bg-blue-500 hover:bg-blue-400"
             disabled={isLoading}
             onClick={() => {
               submit(createRequestBody(categoryName, conceptsHistory));
