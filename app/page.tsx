@@ -73,10 +73,23 @@ export default function Home() {
         <Card className="w-full pt-6">
           <CardContent>
             {!error && (
-              <NamesList
-                isLoading={isLoading}
-                data={object as CardSchemaType}
-              />
+              <div className="space-y-6">
+                <NamesList
+                  difficulty="easy"
+                  isLoading={isLoading}
+                  data={object as CardSchemaType}
+                />
+                <NamesList
+                  difficulty="medium"
+                  isLoading={isLoading}
+                  data={object as CardSchemaType}
+                />
+                <NamesList
+                  difficulty="hard"
+                  isLoading={isLoading}
+                  data={object as CardSchemaType}
+                />
+              </div>
             )}
           </CardContent>
         </Card>
@@ -96,7 +109,16 @@ export default function Home() {
             New Card
           </Button>
         </div>
-        <p className="text-xs">To view categories <a href="https://github.com/raswonders/concept-cards/blob/main/lib/categories.ts" target="_blank" className="text-blue-600 underline">checkout github</a></p>
+        <p className="text-xs ">
+          To view categories{" "}
+          <a
+            href="https://github.com/raswonders/concept-cards/blob/main/lib/categories.ts"
+            target="_blank"
+            className="text-blue-600 underline"
+          >
+            checkout github
+          </a>
+        </p>
       </main>
     </div>
   );
