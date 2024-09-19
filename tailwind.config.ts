@@ -56,6 +56,9 @@ const config: Config = {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      fontFamily: {
+        baloo2: ["var(--font-baloo2)"],
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],

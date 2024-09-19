@@ -51,7 +51,7 @@ export function NamesList({ data, isLoading, difficulty }: NamesListProps) {
           <dl className="text-center space-y-2">
             {sliced.map((concept) => (
               <div key={concept.name}>
-                <dt>{concept.name}</dt>
+                <dt className="font-medium leading-tight">{concept.name}</dt>
                 <dd className="text-sm text-slate-400">{concept.category}</dd>
               </div>
             ))}
