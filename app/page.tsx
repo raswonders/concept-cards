@@ -26,6 +26,7 @@ function createRequestBody(categoryName: string, history: History) {
 export default function Home() {
   const [conceptsHistory, setConceptsHistory] = useState<History>(new Map());
   const [categoryName, setCategoryName] = useState("");
+  const [isTesting, setIsTesting] = useState(false);
   const { object, submit, isLoading, error } = useObject({
     api: "/card/api",
     schema: CardSchema,
@@ -76,16 +77,19 @@ export default function Home() {
               <NamesList
                 difficulty="easy"
                 isLoading={isLoading}
+                isTesting={isTesting}
                 data={object as CardSchemaType}
               />
               <NamesList
                 difficulty="medium"
                 isLoading={isLoading}
+                isTesting={isTesting}
                 data={object as CardSchemaType}
               />
               <NamesList
                 difficulty="hard"
                 isLoading={isLoading}
+                isTesting={isTesting}
                 data={object as CardSchemaType}
               />
             </div>
