@@ -1,40 +1,59 @@
 import { CardSchemaType } from "../../lib/cardSchema";
 import { Skeleton } from "./skeleton";
+import Image from "next/image";
 
-interface Props {
+interface NamesListProps {
   data: CardSchemaType;
   isLoading: boolean;
+  difficulty: "easy" | "medium" | "hard";
 }
 
-function ListSkeleton() {
-  const ITEMS_COUNT = 9;
-  const array = new Array(ITEMS_COUNT).fill(undefined);
+const difficultyMatrix = {
+  easy: 0,
+  medium: 3,
+  hard: 6,
+};
 
-  return (
-    <div className="text-center leading-6 space-y-2">
-      {array.map((_, index) => (
-        <Skeleton
-          key={index}
-          className="inline-block w-2/3 h-[43px] rounded-full bg-primary/10"
-        />
-      ))}
-    </div>
+const difficultyBorderColor = {
+  easy: "border-blue-200",
+  medium: "border-red-200",
+  hard: "border-neutral-400",
+};
+
+export function NamesList({ data, isLoading, difficulty }: NamesListProps) {
+  const sliced = data.names.slice(
+    difficultyMatrix[difficulty],
+    difficultyMatrix[difficulty] + 3
   );
-}
 
-export function NamesList({ data, isLoading }: Props) {
   return isLoading ? (
-    <ListSkeleton />
+    <Skeleton className="w-full h-[10rem] rounded-2xl bg-primary/10" />
   ) : (
-    data.names.length > 0 && (
-      <dl className="text-center space-y-2">
-        {data.names.map((concept) => (
-          <div key={concept.name}>
-            <dt >{concept.name}</dt>
-            <dd className="text-sm text-slate-400">{concept.category}</dd>
-          </div>
-        ))}
-      </dl>
+    sliced.length > 0 && (
+      <div
+        className={`relative border-2 p-4 rounded-2xl ${difficultyBorderColor[difficulty]}`}
+      >
+        <Image
+          className="absolute top-0 right-0 translate-x-1/2 -translate-y-1/2"
+          src={`/images/${difficulty}-icon.svg`}
+          width={40}
+          height={40}
+          alt={`${difficulty} difficulty icon`}
+        />
+        <dl className="text-center">
+          {sliced.map((concept, index) => (
+            <div className="flex flex-col items-center" key={concept.name}>
+              <dt className="font-medium leading-tight">{concept.name}</dt>
+              <dd className="text-sm text-slate-400">{concept.category}</dd>
+              {index < 2 && (
+                <div
+                  className={`w-8 border-b-8 border-dotted my-2 ${difficultyBorderColor[difficulty]}`}
+                ></div>
+              )}
+            </div>
+          ))}
+        </dl>
+      </div>
     )
   );
 }

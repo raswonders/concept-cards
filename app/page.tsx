@@ -68,36 +68,56 @@ export default function Home() {
   }, [object]);
 
   return (
-    <div className="min-h-screen flex justify-center">
-      <main className="min-w-0 w-full max-w-[46ch] py-10 p-6 flex flex-col gap-4 items-center">
-        <Card className="w-full pt-6">
-          <CardContent>
-            {!error && (
+    <main className="min-w-0 w-full max-w-[46ch] py-10 p-6 flex flex-col gap-4 items-center">
+      <Card className="w-full pt-6 rounded-xl2">
+        <CardContent>
+          {!error && (
+            <div className="space-y-6">
               <NamesList
+                difficulty="easy"
                 isLoading={isLoading}
                 data={object as CardSchemaType}
               />
-            )}
-          </CardContent>
-        </Card>
-        <div className="w-full space-y-4">
-          <SelectCategory
-            isLoading={isLoading}
-            value={categoryName}
-            onValueChange={setCategoryName}
-          />
-          <Button
-            className="w-full"
-            disabled={isLoading}
-            onClick={() => {
-              submit(createRequestBody(categoryName, conceptsHistory));
-            }}
-          >
-            New Card
-          </Button>
-        </div>
-        <p className="text-xs">To view categories <a href="https://github.com/raswonders/concept-cards/blob/main/lib/categories.ts" target="_blank" className="text-blue-600 underline">checkout github</a></p>
-      </main>
-    </div>
+              <NamesList
+                difficulty="medium"
+                isLoading={isLoading}
+                data={object as CardSchemaType}
+              />
+              <NamesList
+                difficulty="hard"
+                isLoading={isLoading}
+                data={object as CardSchemaType}
+              />
+            </div>
+          )}
+        </CardContent>
+      </Card>
+      <div className="w-full space-y-4">
+        <SelectCategory
+          isLoading={isLoading}
+          value={categoryName}
+          onValueChange={setCategoryName}
+        />
+        <Button
+          className="w-full bg-blue-500 hover:bg-blue-400"
+          disabled={isLoading}
+          onClick={() => {
+            submit(createRequestBody(categoryName, conceptsHistory));
+          }}
+        >
+          New Card
+        </Button>
+      </div>
+      <p className="text-sm text-slate-400">
+        To view categories{" "}
+        <a
+          href="https://github.com/raswonders/concept-cards/blob/main/lib/categories.ts"
+          target="_blank"
+          className="text-blue-500 underline"
+        >
+          checkout github
+        </a>
+      </p>
+    </main>
   );
 }
