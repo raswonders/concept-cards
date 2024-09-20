@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { Baloo_2 } from "@next/font/google";
+import Image from "next/image";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -36,6 +37,36 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${baloo2.variable} font-baloo2 antialiased`}
       >
         {children}
+        <div className="absolute inset-0 overflow-hidden">
+          <Image
+            className="absolute top-20 right-0 rotate-12 opacity-50"
+            src={`/images/red-exclamation-mark.svg`}
+            width={240}
+            height={240}
+            alt="red exclamation mark"
+          />
+          <Image
+            className="absolute top-40 right-20 -rotate-12 opacity-50"
+            src={`/images/blue-exclamation-mark.svg`}
+            width={240}
+            height={240}
+            alt="blue exclamation mark"
+          />
+          <Image
+            className="absolute bottom-40 left-28 rotate-12 opacity-50"
+            src={`/images/green-exclamation-mark.svg`}
+            width={360}
+            height={360}
+            alt="green exclamation mark"
+          />
+          <Image
+            className="absolute top-1/4 -rotate-12 -translate-x-32 opacity-50"
+            src={`/images/white-question-mark.svg`}
+            width={360}
+            height={360}
+            alt="white question mark"
+          />
+        </div>
       </body>
     </html>
   );
