@@ -13,6 +13,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { NamesList } from "@/components/ui/names-list";
 import { SelectCategory } from "@/components/ui/select-category";
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
 
 function createRequestBody(categoryName: string, history: History) {
   const requestBody = {
@@ -26,6 +28,7 @@ function createRequestBody(categoryName: string, history: History) {
 export default function Home() {
   const [conceptsHistory, setConceptsHistory] = useState<History>(new Map());
   const [categoryName, setCategoryName] = useState("");
+  const [isTesting, setIsTesting] = useState(false);
   const { object, submit, isLoading, error } = useObject({
     api: "/card/api",
     schema: CardSchema,
@@ -76,16 +79,19 @@ export default function Home() {
               <NamesList
                 difficulty="easy"
                 isLoading={isLoading}
+                isTesting={isTesting}
                 data={object as CardSchemaType}
               />
               <NamesList
                 difficulty="medium"
                 isLoading={isLoading}
+                isTesting={isTesting}
                 data={object as CardSchemaType}
               />
               <NamesList
                 difficulty="hard"
                 isLoading={isLoading}
+                isTesting={isTesting}
                 data={object as CardSchemaType}
               />
             </div>
@@ -93,11 +99,13 @@ export default function Home() {
         </CardContent>
       </Card>
       <div className="w-full space-y-4">
-        <SelectCategory
-          isLoading={isLoading}
-          value={categoryName}
-          onValueChange={setCategoryName}
-        />
+        {isTesting && (
+          <SelectCategory
+            isLoading={isLoading}
+            value={categoryName}
+            onValueChange={setCategoryName}
+          />
+        )}
         <Button
           className="w-full bg-blue-500 hover:bg-blue-400"
           disabled={isLoading}
@@ -108,16 +116,27 @@ export default function Home() {
           New Card
         </Button>
       </div>
-      <p className="text-sm text-slate-400">
-        To view categories{" "}
-        <a
-          href="https://github.com/raswonders/concept-cards/blob/main/lib/categories.ts"
-          target="_blank"
-          className="text-blue-500 underline"
-        >
-          checkout github
-        </a>
-      </p>
+
+      {isTesting && (
+        <p className="text-sm text-slate-400">
+          To view queries for categories{" "}
+          <a
+            href="https://github.com/raswonders/concept-cards/blob/main/lib/categories.ts"
+            target="_blank"
+            className="text-blue-500 underline"
+          >
+            checkout github
+          </a>
+        </p>
+      )}
+      <div className="flex items-center gap-2">
+        <Switch
+          id="testing-mode-switch"
+          checked={isTesting}
+          onCheckedChange={setIsTesting}
+        />
+        <Label htmlFor="testing-mode-switch">Testing Mode</Label>
+      </div>
     </main>
   );
 }

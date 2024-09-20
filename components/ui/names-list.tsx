@@ -5,6 +5,7 @@ import Image from "next/image";
 interface NamesListProps {
   data: CardSchemaType;
   isLoading: boolean;
+  isTesting: boolean;
   difficulty: "easy" | "medium" | "hard";
 }
 
@@ -20,7 +21,12 @@ const difficultyBorderColor = {
   hard: "border-neutral-400",
 };
 
-export function NamesList({ data, isLoading, difficulty }: NamesListProps) {
+export function NamesList({
+  data,
+  isLoading,
+  isTesting,
+  difficulty,
+}: NamesListProps) {
   const sliced = data.names.slice(
     difficultyMatrix[difficulty],
     difficultyMatrix[difficulty] + 3
@@ -44,10 +50,14 @@ export function NamesList({ data, isLoading, difficulty }: NamesListProps) {
           {sliced.map((concept, index) => (
             <div className="flex flex-col items-center" key={concept.name}>
               <dt className="font-medium leading-tight">{concept.name}</dt>
-              <dd className="text-sm text-slate-400">{concept.category}</dd>
+              <dd className="text-sm text-slate-400">
+                {isTesting && concept.category}
+              </dd>
               {index < 2 && (
                 <div
-                  className={`w-8 border-b-8 border-dotted my-2 ${difficultyBorderColor[difficulty]}`}
+                  className={`w-8 border-b-8 border-dotted ${
+                    isTesting ? "my-2" : "my-4"
+                  } ${difficultyBorderColor[difficulty]}`}
                 ></div>
               )}
             </div>
