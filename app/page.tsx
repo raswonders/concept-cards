@@ -13,6 +13,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { NamesList } from "@/components/ui/names-list";
 import { SelectCategory } from "@/components/ui/select-category";
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
 
 function createRequestBody(categoryName: string, history: History) {
   const requestBody = {
@@ -127,6 +129,14 @@ export default function Home() {
           </a>
         </p>
       )}
+      <div className="flex items-center gap-2">
+        <Switch
+          id="testing-mode-switch"
+          checked={isTesting}
+          onCheckedChange={setIsTesting}
+        />
+        <Label htmlFor="testing-mode-switch">Testing Mode</Label>
+      </div>
     </main>
   );
 }

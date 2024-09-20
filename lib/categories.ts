@@ -15,21 +15,9 @@ export const wildcardCategory = {
 export const categories: Category[] = [
   {
     name: "Idioms and Expressions",
-    easy: "a common idiom or expression",
-    medium: "a less common idiom or expression",
-    hard: "a rare or complex idiom or expression",
-  },
-  {
-    name: "Famous Movie Quotes",
-    easy: "a famous movie quote from a blockbuster",
-    medium: "a well-known movie quote from a classic film",
-    hard: "an obscure movie quote from a cult film",
-  },
-  {
-    name: "Metaphors",
-    easy: "a simple metaphor",
-    medium: "a more complex metaphor",
-    hard: "an abstract or literary metaphor",
+    easy: "",
+    medium: "a common idiom or expression",
+    hard: "a less common idiom or expression",
   },
   {
     name: "Civilizations and Empires",
