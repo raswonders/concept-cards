@@ -40,28 +40,28 @@ export default function RootLayout({
           {children}
           <div className="absolute inset-0 overflow-hidden -z-10">
             <Image
-              className="absolute top-20 right-0 rotate-12 opacity-50"
+              className="absolute top-20 right-0 rotate-12 opacity-10"
               src={`/images/red-exclamation-mark.svg`}
               width={240}
               height={240}
               alt="red exclamation mark"
             />
             <Image
-              className="absolute top-40 right-20 -rotate-12 opacity-50"
+              className="absolute top-40 right-20 -rotate-12 opacity-15"
               src={`/images/green-exclamation-mark.svg`}
               width={240}
               height={240}
               alt="blue exclamation mark"
             />
             <Image
-              className="absolute bottom-40 left-28 rotate-12 opacity-50"
+              className="absolute bottom-40 left-28 rotate-12 opacity-15"
               src={`/images/blue-exclamation-mark.svg`}
               width={360}
               height={360}
               alt="green exclamation mark"
             />
             <Image
-              className="absolute top-1/4 -rotate-12 -translate-x-32 opacity-50"
+              className="absolute top-1/4 -rotate-12 -translate-x-32 opacity-25"
               src={`/images/white-question-mark.svg`}
               width={360}
               height={360}
