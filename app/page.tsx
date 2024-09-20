@@ -114,16 +114,19 @@ export default function Home() {
           New Card
         </Button>
       </div>
-      <p className="text-sm text-slate-400">
-        To view categories{" "}
-        <a
-          href="https://github.com/raswonders/concept-cards/blob/main/lib/categories.ts"
-          target="_blank"
-          className="text-blue-500 underline"
-        >
-          checkout github
-        </a>
-      </p>
+
+      {isTesting && (
+        <p className="text-sm text-slate-400">
+          To view queries for categories{" "}
+          <a
+            href="https://github.com/raswonders/concept-cards/blob/main/lib/categories.ts"
+            target="_blank"
+            className="text-blue-500 underline"
+          >
+            checkout github
+          </a>
+        </p>
+      )}
     </main>
   );
 }
