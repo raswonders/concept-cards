@@ -50,12 +50,14 @@ export function NamesList({
           {sliced.map((concept, index) => (
             <div className="flex flex-col items-center" key={concept.name}>
               <dt className="font-medium leading-tight">{concept.name}</dt>
-              {isTesting && (
-                <dd className="text-sm text-slate-400">{concept.category}</dd>
-              )}
+              <dd className="text-sm text-slate-400">
+                {isTesting && concept.category}
+              </dd>
               {index < 2 && (
                 <div
-                  className={`w-8 border-b-8 border-dotted my-4 ${difficultyBorderColor[difficulty]}`}
+                  className={`w-8 border-b-8 border-dotted ${
+                    isTesting ? "my-2" : "my-4"
+                  } ${difficultyBorderColor[difficulty]}`}
                 ></div>
               )}
             </div>
