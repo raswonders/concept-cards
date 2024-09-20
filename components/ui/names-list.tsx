@@ -27,7 +27,7 @@ export function NamesList({ data, isLoading, difficulty }: NamesListProps) {
   );
 
   return isLoading ? (
-    <Skeleton className="w-full h-[10rem] rounded-2xl bg-primary/10" />
+    <Skeleton className="w-full h-[12.5rem] rounded-2xl bg-primary/10" />
   ) : (
     sliced.length > 0 && (
       <div
