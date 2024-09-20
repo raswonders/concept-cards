@@ -33,11 +33,11 @@ export function NamesList({
   );
 
   return isLoading ? (
-    <Skeleton className="w-full h-[12.5rem] rounded-2xl bg-primary/10" />
+    <Skeleton className="w-full h-[12.5rem] rounded-xl bg-secondary" />
   ) : (
     sliced.length > 0 && (
       <div
-        className={`relative border-2 p-4 rounded-2xl ${difficultyBorderColor[difficulty]}`}
+        className={`relative border-2 p-4 rounded-xl ${difficultyBorderColor[difficulty]}`}
       >
         <Image
           className="absolute top-0 right-0 translate-x-1/2 -translate-y-1/2"
@@ -50,7 +50,7 @@ export function NamesList({
           {sliced.map((concept, index) => (
             <div className="flex flex-col items-center" key={concept.name}>
               <dt className="font-medium leading-tight">{concept.name}</dt>
-              <dd className="text-sm text-slate-400">
+              <dd className="text-sm text-muted-foreground">
                 {isTesting && concept.category}
               </dd>
               {index < 2 && (
