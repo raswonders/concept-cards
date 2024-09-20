@@ -72,7 +72,7 @@ export default function Home() {
 
   return (
     <main className="min-w-0 w-full max-w-[46ch] py-10 p-6 flex flex-col gap-4 items-center">
-      <Card className="w-full pt-6 rounded-xl2">
+      <Card className="w-full pt-6 ">
         <CardContent>
           {!error && (
             <div className="space-y-6">
@@ -107,7 +107,7 @@ export default function Home() {
           />
         )}
         <Button
-          className="w-full bg-blue-500 hover:bg-blue-400"
+          className="w-full"
           disabled={isLoading}
           onClick={() => {
             submit(createRequestBody(categoryName, conceptsHistory));
@@ -118,12 +118,12 @@ export default function Home() {
       </div>
 
       {isTesting && (
-        <p className="text-sm text-slate-400">
+        <p className="text-sm text-muted-foreground">
           To view queries for categories{" "}
           <a
             href="https://github.com/raswonders/concept-cards/blob/main/lib/categories.ts"
             target="_blank"
-            className="text-blue-500 underline"
+            className="underline text-primary"
           >
             checkout github
           </a>
