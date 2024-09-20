@@ -97,11 +97,13 @@ export default function Home() {
         </CardContent>
       </Card>
       <div className="w-full space-y-4">
-        <SelectCategory
-          isLoading={isLoading}
-          value={categoryName}
-          onValueChange={setCategoryName}
-        />
+        {isTesting && (
+          <SelectCategory
+            isLoading={isLoading}
+            value={categoryName}
+            onValueChange={setCategoryName}
+          />
+        )}
         <Button
           className="w-full bg-blue-500 hover:bg-blue-400"
           disabled={isLoading}
