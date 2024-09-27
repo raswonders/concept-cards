@@ -15,7 +15,6 @@ import { NamesList } from "@/components/ui/names-list";
 import { SelectCategory } from "@/components/ui/select-category";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
-import { useSwipeable } from "react-swipeable";
 
 function createRequestBody(categoryName: string, history: History) {
   const requestBody = {
@@ -30,18 +29,12 @@ export default function Home() {
   const [conceptsHistory, setConceptsHistory] = useState<History>(new Map());
   const [categoryName, setCategoryName] = useState("");
   const [isTesting, setIsTesting] = useState(false);
+
   const { object, submit, isLoading, error } = useObject({
     api: "/card/api",
     schema: CardSchema,
     initialValue: {
       names: [],
-    },
-  });
-
-  const handlers = useSwipeable({
-    onSwipedLeft: (eventData) => {
-      submit(createRequestBody(categoryName, conceptsHistory));
-      console.log("User Swiped Left!", eventData);
     },
   });
 
@@ -79,10 +72,7 @@ export default function Home() {
   }, [object]);
 
   return (
-    <main
-      className="min-w-0 w-full max-w-[46ch] py-10 p-6 flex flex-col gap-4 items-center"
-      {...handlers}
-    >
+    <main className="min-w-0 w-full max-w-[46ch] py-10 p-6 flex flex-col gap-4 items-center">
       <Card className="w-full pt-6 ">
         <CardContent>
           {!error && (
