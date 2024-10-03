@@ -16,6 +16,7 @@ import { SelectCategory } from "@/components/ui/select-category";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { DraggableCard } from "@/components/ui/draggable-card";
+import { CardDeck } from "@/components/ui/card-deck";
 
 function createRequestBody(categoryName: string, history: History) {
   const requestBody = {
@@ -88,6 +89,7 @@ export default function Home() {
 
   return (
     <main className="min-w-0 w-full max-w-[46ch] py-10 p-6 flex flex-col gap-4 items-center">
+      {/* <CardDeck /> */}
       <DraggableCard>
         <Card className="w-full pt-6 ">
           <CardContent>
