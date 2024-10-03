@@ -81,7 +81,7 @@ export default function Home() {
         />
       )}
 
-      <div className="w-full">
+      {/* <div className="w-full">
         {isTesting && (
           <SelectCategory
             isLoading={isLoading}
@@ -111,7 +111,7 @@ export default function Home() {
           onCheckedChange={setIsTesting}
         />
         <Label htmlFor="testing-mode-switch">Testing Mode</Label>
-      </div>
+      </div> */}
     </main>
   );
 }
