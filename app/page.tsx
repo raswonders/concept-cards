@@ -2,7 +2,7 @@
 
 import { experimental_useObject as useObject } from "ai/react";
 import { CardSchema, CardSchemaType } from "../lib/cardSchema";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
   History,
   parseHistory,
@@ -37,6 +37,12 @@ export default function Home() {
       names: [],
     },
   });
+  const [isHistoryLoaded, setIsHistoryLoaded] = useState(false);
+  const isInitialFetch = useRef(true);
+
+  const fetchData = useCallback(() => {
+    submit(createRequestBody(categoryName, conceptsHistory));
+  }, [categoryName, conceptsHistory, submit]);
 
   useEffect(() => {
     const savedHistory = localStorage.getItem("conceptsHistory");
@@ -45,7 +51,16 @@ export default function Home() {
     } else {
       setConceptsHistory(new Map());
     }
+
+    setIsHistoryLoaded(true);
   }, []);
+
+  useEffect(() => {
+    if (isInitialFetch.current && isHistoryLoaded) {
+      fetchData();
+      isInitialFetch.current = false;
+    }
+  }, [fetchData, isHistoryLoaded]);
 
   useEffect(() => {
     if ((object as CardSchemaType).names.length > 0) {
@@ -112,9 +127,7 @@ export default function Home() {
         <Button
           className="w-full"
           disabled={isLoading}
-          onClick={() => {
-            submit(createRequestBody(categoryName, conceptsHistory));
-          }}
+          onClick={() => fetchData()}
         >
           New Card
         </Button>
