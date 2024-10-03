@@ -10,13 +10,10 @@ import {
   toSerializableHistory,
 } from "../lib/history";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { NamesList } from "@/components/ui/names-list";
 import { SelectCategory } from "@/components/ui/select-category";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { DraggableCard } from "@/components/ui/draggable-card";
-import { CardDeck } from "@/components/ui/card-deck";
 
 function createRequestBody(categoryName: string, history: History) {
   const requestBody = {
@@ -90,34 +87,11 @@ export default function Home() {
   return (
     <main className="min-w-0 w-full max-w-[46ch] py-10 p-6 flex flex-col gap-4 items-center">
       {/* <CardDeck /> */}
-      <DraggableCard>
-        <Card className="w-full pt-6 ">
-          <CardContent>
-            {!error && (
-              <div className="space-y-6">
-                <NamesList
-                  difficulty="easy"
-                  isLoading={isLoading}
-                  isTesting={isTesting}
-                  data={object as CardSchemaType}
-                />
-                <NamesList
-                  difficulty="medium"
-                  isLoading={isLoading}
-                  isTesting={isTesting}
-                  data={object as CardSchemaType}
-                />
-                <NamesList
-                  difficulty="hard"
-                  isLoading={isLoading}
-                  isTesting={isTesting}
-                  data={object as CardSchemaType}
-                />
-              </div>
-            )}
-          </CardContent>
-        </Card>
-      </DraggableCard>
+      <DraggableCard
+        object={{ names: object?.names ?? [] } as CardSchemaType}
+        isLoading={isLoading}
+        isTesting={isTesting}
+      />
       <div className="w-full space-y-4">
         {isTesting && (
           <SelectCategory
