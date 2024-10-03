@@ -72,7 +72,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="min-w-0 w-full max-w-[46ch] py-10 p-6 flex flex-col gap-4 items-center">
+    <main className="min-w-0 w-full max-w-[46ch] p-6 flex flex-col items-center">
       {!error && (
         <CardDeck
           object={{ names: object?.names ?? [] } as CardSchemaType}
