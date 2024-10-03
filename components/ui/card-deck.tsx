@@ -13,9 +13,15 @@ interface CardDeckProps {
   object: CardSchemaType;
   isTesting: boolean;
   isLoading: boolean;
+  fetchData: () => void;
 }
 
-export function CardDeck({ object, isTesting, isLoading }: CardDeckProps) {
+export function CardDeck({
+  object,
+  isTesting,
+  isLoading,
+  fetchData,
+}: CardDeckProps) {
   const [deck, setDeck] = useState<Card[]>([]);
 
   function addCard() {
@@ -24,13 +30,14 @@ export function CardDeck({ object, isTesting, isLoading }: CardDeckProps) {
   }
 
   return (
-    <div className="w-full flex justify-center">
+    <div className="relative w-full flex justify-center">
       {deck.map((card) => (
         <DraggableCard
           key={card.id}
           object={object}
           isLoading={isLoading}
           isTesting={isTesting}
+          fetchData={fetchData}
         />
       ))}
       <button

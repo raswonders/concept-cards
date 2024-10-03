@@ -78,6 +78,7 @@ export default function Home() {
           object={{ names: object?.names ?? [] } as CardSchemaType}
           isTesting={isTesting}
           isLoading={isLoading}
+          fetchData={fetchData}
         />
       )}
 

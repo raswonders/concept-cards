@@ -12,12 +12,14 @@ interface DraggableCardProps {
   object: CardSchemaType;
   isLoading: boolean;
   isTesting: boolean;
+  fetchData: () => void;
 }
 
 export function DraggableCard({
   object,
   isLoading,
   isTesting,
+  fetchData,
 }: DraggableCardProps) {
   const [variant, setVariant] = useState("");
 
@@ -29,13 +31,14 @@ export function DraggableCard({
     if (trigger) {
       console.log(info);
       setVariant("flyOff");
+      fetchData();
     }
   };
 
   return (
     <motion.div
       variants={variants}
-      className="w-full"
+      className="absolute w-full"
       drag="x"
       animate={variant}
       initial={false}
@@ -43,7 +46,7 @@ export function DraggableCard({
       dragSnapToOrigin={true}
       dragMomentum={true}
     >
-      <Card className="w-full pt-6 ">
+      <Card className="w-full pt-6">
         <CardContent>
           <div className="space-y-6">
             <NamesList
