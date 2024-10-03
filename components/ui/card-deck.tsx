@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { DraggableCard } from "./draggable-card";
+import { CardSchemaType } from "@/lib/cardSchema";
 
 let id = 0;
 const generateId = () => ++id;
@@ -8,7 +9,13 @@ interface Card {
   id: number;
 }
 
-export function CardDeck() {
+interface CardDeckProps {
+  object: CardSchemaType;
+  isTesting: boolean;
+  isLoading: boolean;
+}
+
+export function CardDeck({ object, isTesting, isLoading }: CardDeckProps) {
   const [deck, setDeck] = useState<Card[]>([]);
 
   function addCard() {
@@ -19,7 +26,12 @@ export function CardDeck() {
   return (
     <div className="w-full flex justify-center">
       {deck.map((card) => (
-        <DraggableCard key={card.id} />
+        <DraggableCard
+          key={card.id}
+          object={object}
+          isLoading={isLoading}
+          isTesting={isTesting}
+        />
       ))}
       <button
         onClick={() => {
@@ -27,7 +39,7 @@ export function CardDeck() {
         }}
         className="w-56 h-56 flex justify-center items-center border-8 border-dashed rounded-lg"
       >
-        New Card
+        Draw Card
       </button>
     </div>
   );

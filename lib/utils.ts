@@ -1,5 +1,7 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { toSerializableHistory } from "./history";
+import { History } from "./history";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -13,4 +15,13 @@ export function shuffleArray<T>(array: T[]) {
   }
 
   return shuffled;
+}
+
+export function createRequestBody(categoryName: string, history: History) {
+  const requestBody = {
+    categoryName,
+    history: toSerializableHistory(history),
+  };
+
+  return requestBody;
 }
