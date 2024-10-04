@@ -36,7 +36,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${baloo2.variable} font-baloo2 antialiased`}
       >
-        <div className="min-h-screen flex justify-center overflow-x-hidden">
+        <div className="min-h-screen flex justify-center overflow-x-hidden">   
           {children}
           <div className="absolute inset-0 overflow-hidden -z-10">
             <Image

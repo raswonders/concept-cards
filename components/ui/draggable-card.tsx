@@ -1,9 +1,12 @@
-import { motion, PanInfo } from "framer-motion";
+import { motion, PanInfo, useMotionValue, useTransform } from "framer-motion";
 import { useRef, useState } from "react";
 import { Card, CardContent } from "./card";
 import { NamesList } from "./names-list";
 import { CardSchemaType } from "@/lib/cardSchema";
-import { log } from "console";
+import { Trash2 } from "lucide-react";
+
+const PANEL_W = 80;
+const TRIGGER_W = 100;
 
 const variants = {
   delete: {
@@ -35,11 +38,8 @@ export function DraggableCard({
     event: PointerEvent | TouchEvent | MouseEvent,
     info: PanInfo
   ) => {
-    const minDistance = cardRef.current
-      ? cardRef.current.offsetWidth / 2
-      : 381 / 2;
-    const triggerVelocity = Math.abs(info.velocity.x) > 500;
-    const triggerOffset = Math.abs(info.offset.x) > minDistance;
+    const triggerVelocity = Math.abs(info.velocity.x) >= 500;
+    const triggerOffset = Math.abs(info.offset.x) >= TRIGGER_W;
 
     if (triggerVelocity || triggerOffset) {
       setVariant("delete");
@@ -47,42 +47,97 @@ export function DraggableCard({
     }
   };
 
+  const cardX = useMotionValue(0);
+  const actionPanelRightX = useTransform(cardX, [-TRIGGER_W, 0], [-PANEL_W, 0]);
+  const actionPanelLeftX = useTransform(cardX, [0, TRIGGER_W], [0, PANEL_W]);
+  const bgColor = useTransform(
+    cardX,
+    [-TRIGGER_W, -TRIGGER_W + 0.01, TRIGGER_W - 0.01, TRIGGER_W],
+    [
+      "hsl(var(--destructive))",
+      "hsl(var(--muted))",
+      "hsl(var(--muted))",
+      "hsl(var(--destructive))",
+    ]
+  );
+
+  const foregroundColor = useTransform(
+    cardX,
+    [-TRIGGER_W, -TRIGGER_W + 0.01, TRIGGER_W - 0.01, TRIGGER_W],
+    [
+      "hsl(var(--destructive-foreground))",
+      "hsl(var(--muted-foreground))",
+      "hsl(var(--muted-foreground))",
+      "hsl(var(--destructive-foreground))",
+    ]
+  );
+
   return (
     <motion.div
       ref={cardRef}
       variants={variants}
-      className="absolute w-full"
+      className="absolute w-full touch-pan-y-all"
       drag="x"
       animate={variant}
       initial={false}
       onDragEnd={handleDragEnd}
       dragSnapToOrigin={true}
       dragMomentum={true}
+      dragConstraints={{ left: -TRIGGER_W, right: TRIGGER_W }}
+      dragElastic={0.2}
+      style={{ x: cardX }}
     >
-      <Card className="w-full pt-6">
-        <CardContent>
-          <div className="space-y-6">
-            <NamesList
-              difficulty="easy"
-              isLoading={isLoading}
-              isTesting={isTesting}
-              data={object as CardSchemaType}
-            />
-            <NamesList
-              difficulty="medium"
-              isLoading={isLoading}
-              isTesting={isTesting}
-              data={object as CardSchemaType}
-            />
-            <NamesList
-              difficulty="hard"
-              isLoading={isLoading}
-              isTesting={isTesting}
-              data={object as CardSchemaType}
-            />
-          </div>
-        </CardContent>
-      </Card>
+      <div className="relative w-full rounded-xl overflow-x-hidden">
+        <Card className="w-full">
+          <motion.div
+            className="absolute top-0 bottom-0 z-10 flex items-center justify-center"
+            style={{
+              x: actionPanelLeftX,
+              width: PANEL_W,
+              left: -PANEL_W,
+              backgroundColor: bgColor,
+              color: foregroundColor,
+            }}
+          >
+            <Trash2 />
+          </motion.div>
+          <motion.div
+            className="absolute top-0 bottom-0 z-10 flex items-center justify-center"
+            style={{
+              x: actionPanelRightX,
+              width: PANEL_W,
+              right: -PANEL_W,
+              backgroundColor: bgColor,
+              color: foregroundColor,
+            }}
+          >
+            <Trash2 />
+          </motion.div>
+
+          <CardContent className="relative pt-6 z-0">
+            <div className="space-y-6">
+              <NamesList
+                difficulty="easy"
+                isLoading={isLoading}
+                isTesting={isTesting}
+                data={object as CardSchemaType}
+              />
+              <NamesList
+                difficulty="medium"
+                isLoading={isLoading}
+                isTesting={isTesting}
+                data={object as CardSchemaType}
+              />
+              <NamesList
+                difficulty="hard"
+                isLoading={isLoading}
+                isTesting={isTesting}
+                data={object as CardSchemaType}
+              />
+            </div>
+          </CardContent>
+        </Card>
+      </div>
     </motion.div>
   );
 }
