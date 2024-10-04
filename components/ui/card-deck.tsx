@@ -24,6 +24,11 @@ export function CardDeck({
 }: CardDeckProps) {
   const [deck, setDeck] = useState<Card[]>([]);
 
+  function handleDelete(cardId: number) {
+    setDeck((prevDeck) => prevDeck.filter((card) => card.id !== cardId));
+    fetchData();
+  }
+
   function addCard() {
     const newCard = { id: generateId() };
     setDeck([...deck, newCard]);
@@ -34,10 +39,11 @@ export function CardDeck({
       {deck.map((card) => (
         <DraggableCard
           key={card.id}
+          id={card.id}
           object={object}
           isLoading={isLoading}
           isTesting={isTesting}
-          fetchData={fetchData}
+          handleDelete={handleDelete}
         />
       ))}
       <button

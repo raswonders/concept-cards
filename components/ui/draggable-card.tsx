@@ -3,32 +3,30 @@ import { useRef, useState } from "react";
 import { Card, CardContent } from "./card";
 import { NamesList } from "./names-list";
 import { CardSchemaType } from "@/lib/cardSchema";
+import { log } from "console";
 
 const variants = {
-  flyOffRight: {
-    x: "100vw",
+  delete: {
+    scale: 0.8,
     opacity: 0,
-    transition: { type: "spring" },
-  },
-  flyOffLeft: {
-    x: "-100vw",
-    opacity: 0,
-    transition: { type: "spring" },
+    transition: { duration: 0.2 },
   },
 };
 
 interface DraggableCardProps {
+  id: number;
   object: CardSchemaType;
   isLoading: boolean;
   isTesting: boolean;
-  fetchData: () => void;
+  handleDelete: (cardId: number) => void;
 }
 
 export function DraggableCard({
+  id,
   object,
   isLoading,
   isTesting,
-  fetchData,
+  handleDelete,
 }: DraggableCardProps) {
   const [variant, setVariant] = useState("");
   const cardRef = useRef<HTMLDivElement>(null);
@@ -44,13 +42,8 @@ export function DraggableCard({
     const triggerOffset = Math.abs(info.offset.x) > minDistance;
 
     if (triggerVelocity || triggerOffset) {
-      if (info.offset.x > 0) {
-        setVariant("flyOffRight");
-      } else {
-        setVariant("flyOffLeft");
-      }
-
-      setTimeout(() => fetchData(), 400);
+      setVariant("delete");
+      setTimeout(() => handleDelete(id), 200);
     }
   };
 
