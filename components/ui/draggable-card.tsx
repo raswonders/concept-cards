@@ -19,6 +19,10 @@ const variants = {
     scale: 1,
     transition: { duration: 0.5 },
   },
+  hold: {
+    scale: 1.1,
+    transition: { duration: 0.2 },
+  },
 };
 
 interface DraggableCardProps {
@@ -88,6 +92,7 @@ export function DraggableCard({
       drag="x"
       animate={variant}
       initial="delete"
+      whileTap="hold"
       onDragEnd={handleDragEnd}
       dragSnapToOrigin={true}
       dragMomentum={true}
