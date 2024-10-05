@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { DraggableCard } from "./draggable-card";
 import { CardSchemaType } from "@/lib/cardSchema";
+import { motion } from "framer-motion";
 
 let id = 0;
 const generateId = () => ++id;
@@ -36,6 +37,15 @@ export function CardDeck({
 
   return (
     <div className="relative w-full flex justify-center">
+      <motion.button
+        whileTap={{ scale: 1.1 }}
+        onClick={() => {
+          addCard();
+        }}
+        className="w-56 h-56 flex justify-center items-center border-8 border-dashed rounded-xl "
+      >
+        Draw Card
+      </motion.button>
       {deck.map((card) => (
         <DraggableCard
           key={card.id}
@@ -46,14 +56,6 @@ export function CardDeck({
           handleDelete={handleDelete}
         />
       ))}
-      <button
-        onClick={() => {
-          addCard();
-        }}
-        className="w-56 h-56 flex justify-center items-center border-8 border-dashed rounded-lg"
-      >
-        Draw Card
-      </button>
     </div>
   );
 }
