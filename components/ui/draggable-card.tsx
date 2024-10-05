@@ -14,6 +14,11 @@ const variants = {
     opacity: 0,
     transition: { duration: 0.2 },
   },
+  create: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 0.5 },
+  },
 };
 
 interface DraggableCardProps {
@@ -31,7 +36,7 @@ export function DraggableCard({
   isTesting,
   handleDelete,
 }: DraggableCardProps) {
-  const [variant, setVariant] = useState("");
+  const [variant, setVariant] = useState("create");
   const cardRef = useRef<HTMLDivElement>(null);
 
   const handleDragEnd = (
@@ -43,7 +48,10 @@ export function DraggableCard({
 
     if (triggerVelocity || triggerOffset) {
       setVariant("delete");
-      setTimeout(() => handleDelete(id), 200);
+      setTimeout(() => {
+        setVariant("create");
+        handleDelete(id);
+      }, 200);
     }
   };
 
@@ -76,10 +84,10 @@ export function DraggableCard({
     <motion.div
       ref={cardRef}
       variants={variants}
-      className="absolute w-full touch-pan-y-all"
+      className="absolute w-full touch-pan-y-all opacity-0"
       drag="x"
       animate={variant}
-      initial={false}
+      initial="delete"
       onDragEnd={handleDragEnd}
       dragSnapToOrigin={true}
       dragMomentum={true}
