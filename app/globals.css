@@ -91,3 +91,10 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  .touch-pan-y-all,
+  .touch-pan-y-all * {
+    touch-action: pan-y;
+  }
+}

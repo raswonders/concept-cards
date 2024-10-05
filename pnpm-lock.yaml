@@ -35,6 +35,9 @@ dependencies:
   clsx:
     specifier: ^2.1.1
     version: 2.1.1
+  framer-motion:
+    specifier: ^11.11.1
+    version: 11.11.1(react-dom@18.3.1)(react@18.3.1)
   lucide-react:
     specifier: ^0.438.0
     version: 0.438.0(react@18.3.1)
@@ -2357,6 +2360,25 @@ packages:
     dependencies:
       node-domexception: 1.0.0
       web-streams-polyfill: 4.0.0-beta.3
+    dev: false
+
+  /framer-motion@11.11.1(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-Ucr9eHSrk0d+l6vyl9fvq6omh/PAWHjS+PlczpsoUdhJo1TuF3ULWJNuAMnpWQ1dGyPOyoUVuYlUKjE/s8dyCA==}
+    peerDependencies:
+      '@emotion/is-prop-valid': '*'
+      react: ^18.0.0
+      react-dom: ^18.0.0
+    peerDependenciesMeta:
+      '@emotion/is-prop-valid':
+        optional: true
+      react:
+        optional: true
+      react-dom:
+        optional: true
+    dependencies:
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+      tslib: 2.7.0
     dev: false
 
   /fs.realpath@1.0.0:

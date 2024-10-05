@@ -1,32 +1,16 @@
 "use client";
 
 import { experimental_useObject as useObject } from "ai/react";
-import { CardSchema, CardSchemaType } from "../lib/cardSchema";
-import { useEffect, useState } from "react";
-import {
-  History,
-  parseHistory,
-  serializeHistory,
-  toSerializableHistory,
-} from "../lib/history";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { NamesList } from "@/components/ui/names-list";
+import { CardSchema, CardSchemaType } from "@/lib/cardSchema";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { SelectCategory } from "@/components/ui/select-category";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
-
-function createRequestBody(categoryName: string, history: History) {
-  const requestBody = {
-    categoryName,
-    history: toSerializableHistory(history),
-  };
-
-  return requestBody;
-}
+import { History, parseHistory, serializeHistory } from "@/lib/history";
+import { createRequestBody } from "@/lib/utils";
+import { CardDeck } from "@/components/ui/card-deck";
 
 export default function Home() {
-  const [conceptsHistory, setConceptsHistory] = useState<History>(new Map());
   const [categoryName, setCategoryName] = useState("");
   const [isTesting, setIsTesting] = useState(false);
   const { object, submit, isLoading, error } = useObject({
@@ -36,15 +20,14 @@ export default function Home() {
       names: [],
     },
   });
+  const [conceptsHistory, setConceptsHistory] = useState<History>(new Map());
+  const [isHistoryLoaded, setIsHistoryLoaded] = useState(false);
 
-  useEffect(() => {
-    const savedHistory = localStorage.getItem("conceptsHistory");
-    if (savedHistory) {
-      setConceptsHistory(parseHistory(savedHistory));
-    } else {
-      setConceptsHistory(new Map());
-    }
-  }, []);
+  const isInitialFetch = useRef(true);
+
+  const fetchData = useCallback(() => {
+    submit(createRequestBody(categoryName, conceptsHistory));
+  }, [categoryName, conceptsHistory, submit]);
 
   useEffect(() => {
     if ((object as CardSchemaType).names.length > 0) {
@@ -70,73 +53,66 @@ export default function Home() {
     }
   }, [object]);
 
+  useEffect(() => {
+    if (isInitialFetch.current && isHistoryLoaded) {
+      fetchData();
+      isInitialFetch.current = false;
+    }
+  }, [fetchData, isHistoryLoaded]);
+
+  useEffect(() => {
+    const savedHistory = localStorage.getItem("conceptsHistory");
+    if (savedHistory) {
+      setConceptsHistory(parseHistory(savedHistory));
+    } else {
+      setConceptsHistory(new Map());
+    }
+
+    setIsHistoryLoaded(true);
+  }, []);
+
   return (
-    <main className="min-w-0 w-full max-w-[46ch] py-10 p-6 flex flex-col gap-4 items-center">
-      <Card className="w-full pt-6 ">
-        <CardContent>
-          {!error && (
-            <div className="space-y-6">
-              <NamesList
-                difficulty="easy"
-                isLoading={isLoading}
-                isTesting={isTesting}
-                data={object as CardSchemaType}
-              />
-              <NamesList
-                difficulty="medium"
-                isLoading={isLoading}
-                isTesting={isTesting}
-                data={object as CardSchemaType}
-              />
-              <NamesList
-                difficulty="hard"
-                isLoading={isLoading}
-                isTesting={isTesting}
-                data={object as CardSchemaType}
-              />
-            </div>
-          )}
-        </CardContent>
-      </Card>
-      <div className="w-full space-y-4">
-        {isTesting && (
+    <main className="min-w-0 w-full max-w-[46ch] p-6 flex flex-col items-center">
+      <div className="flex flex-col items-center space-y-6 mb-6">
+        <div className="flex items-center gap-2">
+          <Switch
+            id="testing-mode-switch"
+            checked={isTesting}
+            onCheckedChange={setIsTesting}
+          />
+          <Label htmlFor="testing-mode-switch">Testing Mode</Label>
+        </div>
+
+        <div
+          className={`${isTesting ? "" : "hidden"} w-full flex flex-col gap-2`}
+        >
           <SelectCategory
             isLoading={isLoading}
             value={categoryName}
             onValueChange={setCategoryName}
           />
-        )}
-        <Button
-          className="w-full"
-          disabled={isLoading}
-          onClick={() => {
-            submit(createRequestBody(categoryName, conceptsHistory));
-          }}
-        >
-          New Card
-        </Button>
+
+          <p className="text-sm text-muted-foreground">
+            To view queries for categories{" "}
+            <a
+              href="https://github.com/raswonders/concept-cards/blob/main/lib/categories.ts"
+              target="_blank"
+              className="underline text-primary"
+            >
+              checkout github
+            </a>
+          </p>
+        </div>
       </div>
 
-      {isTesting && (
-        <p className="text-sm text-muted-foreground">
-          To view queries for categories{" "}
-          <a
-            href="https://github.com/raswonders/concept-cards/blob/main/lib/categories.ts"
-            target="_blank"
-            className="underline text-primary"
-          >
-            checkout github
-          </a>
-        </p>
-      )}
-      <div className="flex items-center gap-2">
-        <Switch
-          id="testing-mode-switch"
-          checked={isTesting}
-          onCheckedChange={setIsTesting}
+      {!error && (
+        <CardDeck
+          object={{ names: object?.names ?? [] } as CardSchemaType}
+          isTesting={isTesting}
+          isLoading={isLoading}
+          fetchData={fetchData}
         />
-        <Label htmlFor="testing-mode-switch">Testing Mode</Label>
-      </div>
+      )}
     </main>
   );
 }
