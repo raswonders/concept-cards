@@ -24,6 +24,7 @@ export function CardDeck({
   fetchData,
 }: CardDeckProps) {
   const [deck, setDeck] = useState<Card[]>([]);
+  const [isAddingCard, setIsAddingCard] = useState(false);
 
   function handleDelete(cardId: number) {
     setDeck((prevDeck) => prevDeck.filter((card) => card.id !== cardId));
@@ -33,15 +34,18 @@ export function CardDeck({
   function addCard() {
     const newCard = { id: generateId() };
     setDeck([...deck, newCard]);
+    setIsAddingCard(false);
   }
 
   return (
     <div className="relative w-full flex justify-center">
       <motion.button
-        whileTap={{ scale: 1.1 }}
+        whileTap={isAddingCard ? undefined : { scale: 1.1 }}
         onClick={() => {
+          setIsAddingCard(true);
           addCard();
         }}
+        disabled={isAddingCard}
         className="w-56 h-56 flex justify-center items-center border-8 border-dashed rounded-xl "
       >
         Draw Card
