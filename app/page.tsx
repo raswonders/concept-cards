@@ -2,13 +2,19 @@
 
 import { experimental_useObject as useObject } from "ai/react";
 import { CardSchema, CardSchemaType } from "@/lib/cardSchema";
-import { useCallback, useEffect, useRef, useState } from "react";
-import { SelectCategory } from "@/components/ui/select-category";
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+
+import { createRequestBody } from "@/lib/utils";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
-import { History, parseHistory, serializeHistory } from "@/lib/history";
-import { createRequestBody } from "@/lib/utils";
+import { SelectCategory } from "@/components/ui/select-category";
 import { CardDeck } from "@/components/ui/card-deck";
+import { useConceptsHistory } from "@/hooks/useConceptsHistory";
 
 export default function Home() {
   const [categoryName, setCategoryName] = useState("");
@@ -20,9 +26,8 @@ export default function Home() {
       names: [],
     },
   });
-  const [conceptsHistory, setConceptsHistory] = useState<History>(new Map());
-  const [isHistoryLoaded, setIsHistoryLoaded] = useState(false);
 
+  const [conceptsHistory, setConceptsHistory] = useConceptsHistory();
   const isInitialFetch = useRef(true);
 
   const fetchData = useCallback(() => {
@@ -46,30 +51,18 @@ export default function Home() {
             );
           }
         }
-        const json = serializeHistory(next);
-        if (json) localStorage.setItem("conceptsHistory", json);
+
         return next;
       });
     }
-  }, [object]);
+  }, [object, setConceptsHistory]);
 
   useEffect(() => {
-    if (isInitialFetch.current && isHistoryLoaded) {
+    if (isInitialFetch.current) {
       fetchData();
       isInitialFetch.current = false;
     }
-  }, [fetchData, isHistoryLoaded]);
-
-  useEffect(() => {
-    const savedHistory = localStorage.getItem("conceptsHistory");
-    if (savedHistory) {
-      setConceptsHistory(parseHistory(savedHistory));
-    } else {
-      setConceptsHistory(new Map());
-    }
-
-    setIsHistoryLoaded(true);
-  }, []);
+  }, [fetchData]);
 
   return (
     <main className="min-w-0 w-full max-w-[46ch] p-6 flex flex-col items-center">
