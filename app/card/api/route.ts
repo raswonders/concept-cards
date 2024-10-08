@@ -12,7 +12,12 @@ export async function POST(req: Request) {
 
   const conceptsHistory = fromSerializableHistory(body.history);
   const categoryName = body.categoryName;
-  const prompt = createPrompt(categoryName, conceptsHistory);
+  let prompt: string;
+  if (process.env.NODE_ENV === "development") {
+    prompt = "";
+  } else {
+    prompt = createPrompt(categoryName, conceptsHistory);
+  }
 
   console.log("querying model...");
   console.log({ prompt });
