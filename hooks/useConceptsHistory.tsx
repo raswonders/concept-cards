@@ -1,17 +1,17 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { useLocalStorage } from "./useLocalStorage";
-import { parseHistory, serializeHistory, History } from "@/lib/history";
+import { parseHistory, serializeHistory, ConceptsHistory } from "@/lib/history";
 
 export function useConceptsHistory(): [
-  History,
-  Dispatch<SetStateAction<History>>
+  ConceptsHistory,
+  Dispatch<SetStateAction<ConceptsHistory>>
 ] {
   const [storedHistory, setStoredHistory] = useLocalStorage(
     "conceptsHistory",
     "[]"
   );
 
-  const [conceptsHistory, setConceptsHistory] = useState<History>(
+  const [conceptsHistory, setConceptsHistory] = useState<ConceptsHistory>(
     parseHistory(storedHistory)
   );
 

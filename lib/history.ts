@@ -1,7 +1,7 @@
-export type History = Map<string, Set<string>>;
+export type ConceptsHistory = Map<string, Set<string>>;
 export type HistorySerializable = [string, string[]][];
 
-export function toSerializableHistory(data: History) {
+export function toSerializableHistory(data: ConceptsHistory) {
   const array = Array.from(data);
   return array.map(([key, value]) => [key, Array.from(value)]);
 }
@@ -14,7 +14,7 @@ export function fromSerializableHistory(data: HistorySerializable) {
   return new Map(array);
 }
 
-export function serializeHistory(data: History) {
+export function serializeHistory(data: ConceptsHistory) {
   try {
     const json = JSON.stringify(toSerializableHistory(data));
     return json;

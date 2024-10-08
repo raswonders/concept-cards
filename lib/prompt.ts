@@ -1,6 +1,6 @@
 import { categories, Category, wildcardCategory } from "./categories";
 import { shuffleArray } from "./utils";
-import { History } from "@/lib/history";
+import { ConceptsHistory } from "@/lib/history";
 
 const difficultyMatrix = {
   easy: 0,
@@ -9,7 +9,7 @@ const difficultyMatrix = {
 };
 const difficulties = ["easy", "medium", "hard"];
 
-export function createPrompt(categoryName: string, history: History) {
+export function createPrompt(categoryName: string, history: ConceptsHistory) {
   if (categoryName) {
     const category = categories.find(
       (category) => category.name === categoryName
@@ -22,7 +22,7 @@ export function createPrompt(categoryName: string, history: History) {
   return createMultiCatPrompt(history);
 }
 
-function createMultiCatPrompt(history: History) {
+function createMultiCatPrompt(history: ConceptsHistory) {
   let prompt = "";
 
   for (const difficulty of difficulties) {
@@ -54,7 +54,7 @@ function createMultiCatPrompt(history: History) {
 
 function createSingleCatPrompt(
   category: Category,
-  history: History = new Map()
+  history: ConceptsHistory = new Map()
 ) {
   let prompt = "";
 
