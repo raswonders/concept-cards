@@ -2,19 +2,14 @@
 
 import { experimental_useObject as useObject } from "ai/react";
 import { CardSchema, CardSchemaType } from "@/lib/cardSchema";
-import {
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
-
+import { useCallback, useState } from "react";
 import { createRequestBody } from "@/lib/utils";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { SelectCategory } from "@/components/ui/select-category";
 import { CardDeck } from "@/components/ui/card-deck";
 import { useConceptsHistory } from "@/hooks/useConceptsHistory";
+import { useInitialFetch } from "@/hooks/useInitialFetch";
 
 export default function Home() {
   const [categoryName, setCategoryName] = useState("");
@@ -27,42 +22,13 @@ export default function Home() {
     },
   });
 
-  const [conceptsHistory, setConceptsHistory] = useConceptsHistory();
-  const isInitialFetch = useRef(true);
+  const [conceptsHistory] = useConceptsHistory(object as CardSchemaType);
 
   const fetchData = useCallback(() => {
     submit(createRequestBody(categoryName, conceptsHistory));
   }, [categoryName, conceptsHistory, submit]);
 
-  useEffect(() => {
-    if ((object as CardSchemaType).names.length > 0) {
-      setConceptsHistory((prev) => {
-        const next = new Map(prev);
-        for (const concept of (object as CardSchemaType).names) {
-          if (!next.has(concept.category)) {
-            next.set(concept.category, new Set([concept.name]));
-          } else {
-            next.set(
-              concept.category,
-              new Set([
-                ...(next.get(concept.category) as Set<string>),
-                concept.name,
-              ])
-            );
-          }
-        }
-
-        return next;
-      });
-    }
-  }, [object, setConceptsHistory]);
-
-  useEffect(() => {
-    if (isInitialFetch.current) {
-      fetchData();
-      isInitialFetch.current = false;
-    }
-  }, [fetchData]);
+  useInitialFetch(fetchData);
 
   return (
     <main className="min-w-0 w-full max-w-[46ch] p-6 flex flex-col items-center">
